@@ -13,7 +13,7 @@ export const Login = () => {
                 <img src={Logo} alt="Sportify_Logo" />
             </div>
             <div className="form-google-login-wrapper">
-                <form className='login-form-container' action="">
+                <form className='login-form-container' action="GET">
                     <div className="username-wrapper">
                         <div className="input-text prim--color">Username</div>
                         <input type="text" className='custom-login-input' id='username' size={30} required />

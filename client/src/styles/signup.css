@@ -1,4 +1,4 @@
-.registration-main-contianer {
+.signup-main-contianer {
     margin-top: 4rem;
     padding: 0;
     display: flex;
@@ -25,7 +25,7 @@
     padding: 2.6rem;
 }
 
-.registration-form-container {
+.signup-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
