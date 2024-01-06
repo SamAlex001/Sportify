@@ -1,0 +1,110 @@
+.login-main-contianer {
+    margin-top: 4rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.logo-container>img {
+    height: 7rem;
+    user-select: none;
+}
+
+.form-google-login-wrapper {
+    width: max-content;
+    border: none;
+    border-radius: .4rem;
+    background-color: #397367;
+    padding: 2.6rem;
+}
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: max-content;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: none;
+    border-radius: .4rem;
+}
+
+.username-wrapper,
+.email-wrapper,
+.password-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .4rem;
+    font-size: .8rem;
+}
+
+.custom-login-input {
+    border: .1rem #252525 solid;
+    border-radius: 0rem;
+}
+
+.prim--color {
+    color: #397367;
+}
+
+.tert--color {
+    color: #ffffff;
+}
+
+.login-form-btn {
+    border: none;
+    border-radius: .26rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+    background-color: #397367;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.google-login-btn {
+    border: none;
+    border-radius: .26rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+    background-color: #ffffff;
+    color: #397367;
+    text-transform: capitalize;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+    width: 100%;
+}
+
+.login-icon {
+    font-size: 1.2rem;
+}
+
+.form-google-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-ref-link-container {
+    border: none;
+    background-color: transparent;
+    padding-top: 1rem;
+    font-size: .8rem;
+    text-decoration: underline;
+    text-transform: capitalize;
+    cursor: pointer;
+}
