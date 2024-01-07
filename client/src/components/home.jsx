@@ -1,7 +1,7 @@
 export const Home = () => {
     return (
         <div>
-            <h1>Hello! {location.state.id}</h1>
+            <h1>Home Page</h1>
         </div>
     )
 }
