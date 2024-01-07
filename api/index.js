@@ -58,8 +58,8 @@ app.get('/profile', (req, res) => {
     jwt.verify(token, secret, {}, (error, info) => {
         if (error) throw error; // Throw caught error
         res.json(info); // Display response information
-    })
-    res.json(req.cookies);
+    });
+    // res.json(req.cookies);
 });
 
 app.listen(PORT, () => {

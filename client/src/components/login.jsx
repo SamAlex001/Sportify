@@ -21,7 +21,7 @@ export const Login = () => {
             credentials: 'include'
         });
         if (response.ok) {
-            setRedirect(!redirect); // navigate to home
+            setRedirect(!redirect); // set redirect = true
             alert('Login Successfull');
         } else {
             alert('Login Failed');
@@ -30,7 +30,7 @@ export const Login = () => {
 
     // Authenticated User redirected to home page
     if (redirect) {
-        navigate('/');
+        navigate('/'); // home.jsx
     }
 
     return (
