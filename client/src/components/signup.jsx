@@ -3,7 +3,6 @@ import Logo from "../assets/Login_SignUP_Logo.png"
 import '../styles/signup.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 
 export const SignUp = () => {
 

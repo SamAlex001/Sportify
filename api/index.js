@@ -62,6 +62,11 @@ app.get('/profile', (req, res) => {
     // res.json(req.cookies);
 });
 
+// Endpoint for logout
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok');
+});
+
 app.listen(PORT, () => {
     console.log(`Server Running at Port:${PORT}`);
 });
