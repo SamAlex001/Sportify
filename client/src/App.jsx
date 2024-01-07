@@ -6,18 +6,6 @@ import { Home } from './components/home'
 import { useEffect } from 'react'
 
 function App() {
-
-  // Logged in functionality
-  useEffect(() => {
-    fetch('http://localhost:4000/profile', {
-      credentials: 'include'
-    }).then(response => {
-        response.json().then(userInfo => {
-          setUsername(userInfo.username);
-        });
-      });
-  }, []);
-
   return (
     <Routes>
       <Route path='/' element={<Home />} />
