@@ -6,7 +6,6 @@ import { SignUp } from './components/Signup'
 import { UserContextProvider } from './context/UserContext'
 
 function App() {
-
   return (
     <UserContextProvider>
       <Routes>
