@@ -4,6 +4,8 @@ import { Home } from './components/Home'
 import { Login } from './components/Login'
 import { SignUp } from './components/Signup'
 import { UserContextProvider } from './context/UserContext'
+import { CreatePost } from './components/CreatePost'
+import { PostPage } from './components/PostPage'
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/createPost' element={<CreatePost />} />
+        <Route path='/post' element={<PostPage />} />
       </Routes>
     </UserContextProvider>
   )

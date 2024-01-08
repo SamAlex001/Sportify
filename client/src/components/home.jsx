@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import { PostPage } from "./PostPage";
+
 
 export const Home = () => {
 
@@ -37,6 +39,8 @@ export const Home = () => {
             <button onClick={logout}>Logout</button>
             <button onClick={() => { navigate('/signup') }}>Sign Up</button>
             <button onClick={() => { navigate('/login') }}>Login</button>
+            <button onClick={() => { navigate('/createPost') }}>Create Post</button>
+            <PostPage />
         </div>
     )
 }

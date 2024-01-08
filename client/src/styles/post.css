@@ -1,0 +1,14 @@
+.post-container {
+    border: .1rem black solid;
+    margin: 1rem;
+}
+
+.post-title,
+.post-summary,
+.post-author,
+.post-time,
+.post-cover,
+.post-content {
+    padding: .2rem;
+    border-bottom: .1rem solid black;
+}
