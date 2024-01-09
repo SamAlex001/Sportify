@@ -19,9 +19,10 @@ app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads')); // to access img from uploads folder
+
 // encryption keys
 const salt = bcrypt.genSaltSync(10);
-const secret = 'hello';
+const secret = 'abcxyz';
 
 // DB Password: 8OTq3CcEClnYJR0m
 mongoose.connect('mongodb+srv://sam:8OTq3CcEClnYJR0m@sportify.aluisxu.mongodb.net/?retryWrites=true&w=majority')
@@ -37,6 +38,7 @@ app.post('/register', async (req, res) => {
         });
         res.json(userDoc);
     } catch (error) {
+        console.log(error);
         res.status(400).json(error);
     }
 });
@@ -67,7 +69,6 @@ app.get('/profile', (req, res) => {
         if (error) throw error; // Throw caught error
         res.json(info); // Display response information
     });
-    // res.json(req.cookies);
 });
 
 // Endpoint for logout
@@ -75,13 +76,32 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '').json('ok');
 });
 
+
+// Endpoint to get post(s)
+app.get('/post', async (req, res) => {
+    res.json(
+        await Post
+            .find() // find all posts
+            .populate('author', ['username']) // get only username of author
+            .sort({ createdAt: -1 }) // sort latest to oldest post
+            .limit(20) // limit to latest 20 posts: avoid overloading
+    );
+});
+
+// Endpoint for opening posts as per ID
+app.get('/post/:id', async (req, res) => {
+    const { id } = req.params;
+    const postDoc = await Post.findById(id).populate('author', ['username']);
+    res.json(postDoc);
+});
+
 // Endpoint for create post
 app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     //CreatePost.jsx: 'file' -> data.set('file', files)
-    const { originalname, path } = req.file; // placing file to originalname
-    const parts = originalname.split('.'); // Spliting originalname to name: Everything before .ext
-    const extension = parts[parts.length - 1] // extension part: Everything after FileName.
-    const newPath = path + '.' + extension; // File Path
+    const { originalname, path } = req.file;
+    const parts = originalname.split('.');
+    const extension = parts[parts.length - 1]
+    const newPath = path + '.' + extension;
     fs.renameSync(path, newPath);
 
     const { token } = req.cookies;
@@ -90,23 +110,46 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
 
         const { title, summary, content } = req.body;
         const postDoc = await Post.create({
-            title, summary, content, cover: newPath, author: info.id
+            title,
+            summary,
+            content,
+            cover: newPath,
+            author: info.id
         });
 
         res.json(postDoc);
     });
 });
 
-// Endpoint to get post(s)
-app.get('/post', async (req, res) => {
-    res.json(
-        await Post
-            .find() // find all posts
-            .populate('author', ['username']) // get only username of author
-            .sort({createdAt: -1}) // sort latest to oldest post
-            .limit(20) // limit to latest 20 posts: avoid overloading
-    );
-})
+// Endpoint for PUT: Updating post
+app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
+    let newPath = null;
+    if (req.file) {
+        const { originalname, path } = req.file;
+        const parts = originalname.split('.');
+        const extension = parts[parts.length - 1]
+        newPath = path + '.' + extension;
+        fs.renameSync(path, newPath);
+    }
+
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, async (error, info) => {
+        if (error) throw error;
+        const { id, title, summary, content } = req.body;
+        const postDoc = await Post.findById(id);
+        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+        if (!isAuthor) {
+            return res.status(400).json('Invalid Author for Post');
+        }
+        await postDoc.updateOne({
+            title,
+            summary,
+            content,
+            cover: newPath ? newPath : postDoc.cover,
+        });
+        res.json(postDoc);
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`Server Running at Port:${PORT}`);

@@ -14,7 +14,7 @@ export const Home = () => {
     useEffect(() => {
         fetch('http://localhost:4000/profile', {
             credentials: 'include',
-        }).then(response => {
+        }).then((response) => {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
             });

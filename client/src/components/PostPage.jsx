@@ -17,8 +17,7 @@ export const PostPage = () => {
 
     return (
         <div>
-            {
-                posts.length > 0 && posts.map(post => (
+            {posts.length > 0 && posts.map(post => (
                     <Post {...post} />
                 ))
             }
