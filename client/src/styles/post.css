@@ -1,14 +1,55 @@
 .post-container {
-    border: .1rem black solid;
-    margin: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.6rem;
+    padding: .8rem;
+    margin-right: 4rem;
+    margin-left: 4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 13px;
+    background: #ffffff;
+    box-shadow: 10px 10px 36px #e6e4e4,
+        -10px -10px 36px #ffffff;
 }
 
-.post-title,
-.post-summary,
-.post-author,
-.post-time,
-.post-cover,
-.post-content {
-    padding: .2rem;
-    border-bottom: .1rem solid black;
+.post-cover {
+    object-fit: cover;
+}
+
+.post-cover>img {
+    height: 14rem;
+    width: 14rem;
+    cursor: pointer;
+    width: min-content;
+    border-radius: .4rem;
+}
+
+.post-title {
+    font-size: 2.4rem;
+    color: black;
+    cursor: pointer;
+}
+
+.post-author {
+    color: #00000097;
+    font-size: 1rem;
+}
+
+.post-read-btn {
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: .24rem;
+    background-color: #397367;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .2s all ease;
+}
+
+.post-read-btn:hover {
+    background-color: #5DA399;
 }

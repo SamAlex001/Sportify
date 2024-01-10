@@ -32,14 +32,12 @@ export const Home = () => {
 
     return (
         <div>
-            {
-                username && (<p>Welcome {username}</p>)
-            }
             <h1>Home Page</h1>
-            <button onClick={logout}>Logout</button>
-            <button onClick={() => { navigate('/signup') }}>Sign Up</button>
-            <button onClick={() => { navigate('/login') }}>Login</button>
-            <button onClick={() => { navigate('/createPost') }}>Create Post</button>
+            {username && (<p>Welcome {username}</p>)}
+            {username && <button onClick={logout}>Logout</button>}
+            {!username && <button onClick={() => { navigate('/signup') }}>Sign Up</button>}
+            {!username && <button onClick={() => { navigate('/login') }}>Login</button>}
+            {username && <button onClick={() => { navigate('/createPost') }}>Create Post</button>}
             <PostPage />
         </div>
     )

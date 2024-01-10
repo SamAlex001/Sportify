@@ -25,6 +25,7 @@ export const Login = () => {
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
+                navigate('/'); // home.jsx
                 setRedirect(!redirect); // set redirect = true
             })
             alert('Login Successfull');
@@ -35,7 +36,6 @@ export const Login = () => {
 
     // Authenticated User redirected to home page
     if (redirect) {
-        navigate('/'); // home.jsx
     }
 
     return (

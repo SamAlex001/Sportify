@@ -1,23 +1,6 @@
 import { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { useNavigate } from 'react-router-dom';
-
-const modules = {
-    toolbar: [
-        [{ 'header': [1, 2, false] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image'],
-        ['clean']
-    ],
-};
-const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-];
+import { useNavigate, Link } from 'react-router-dom';
+import { Editor } from './Editor';
 
 export const CreatePost = () => {
 
@@ -45,15 +28,19 @@ export const CreatePost = () => {
 
         if (response.ok) {
             setRedirect(!redirect);
+            navigate('/');
+
         }
     }
 
     if (redirect) {
-        navigate('/');
+        // navigate('/');
     }
 
     return (
         <div>
+            <Link to={'/'}><button>Go Home</button></Link>
+            <br /><br />
             <form onSubmit={createPost}>
                 <input type="title" placeholder={'Title'} value={title} onChange={(e) => setTitle(e.target.value)} />
                 <br /><br />
@@ -61,12 +48,7 @@ export const CreatePost = () => {
                 <br /><br />
                 <input type="file" onChange={(e) => { setFiles(e.target.files) }} />
                 <br /><br />
-                <ReactQuill
-                    value={content}
-                    modules={modules}
-                    formats={formats}
-                    onChange={newValue => setContent(newValue)}
-                />
+                <Editor value={content} onChange={setContent} />
                 <button>Create Post</button>
             </form>
         </div>

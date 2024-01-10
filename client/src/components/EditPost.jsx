@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { Editor } from "./Editor";
 
 export const EditPost = () => {
@@ -57,6 +57,8 @@ export const EditPost = () => {
 
     return (
         <div>
+            <Link to={'/'}><button>Go Home</button></Link>
+            <br /><br />
             <form onSubmit={updatePost}>
                 <input type="title" placeholder={'Title'} value={title} onChange={(e) => setTitle(e.target.value)} />
                 <br /><br />
