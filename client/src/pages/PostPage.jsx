@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Post } from "./Post";
+import { Post } from "../components/Post";
 
 export const PostPage = () => {
 
@@ -8,7 +8,7 @@ export const PostPage = () => {
 
     // Fetching Post
     useEffect(() => {
-        fetch('http://localhost:4000/post').then(response => {
+        fetch('http://localhost:4000/posts/getpost').then(response => {
             response.json().then(posts => {
                 setPosts(posts);
             });

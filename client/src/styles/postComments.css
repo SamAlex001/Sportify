@@ -1,0 +1,57 @@
+.comm-container {
+   border: none;
+   border-radius: .4rem;
+   background-color: black;
+   padding: 1.4rem;
+}
+
+.comm-content-container {
+   background-color: #fff;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.comm-author-delete-wrapper {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 1rem;
+   padding: 0.4rem;
+   background-color: black;
+   color: #fff;
+   width: fit-content;
+   border-top-left-radius: .31rem;
+   border-top-right-radius: .31rem;
+}
+
+.comm-delete {
+   cursor: pointer;
+}
+
+.comm-del-icon {
+   color: red;
+   font-size: 1.3rem;
+}
+
+.comm-content {
+   padding: 1rem;
+   font-size: 1.2rem;
+   width: 100%;
+}
+
+.comm-post-btn {
+   background-color: #397367;
+   color: #fff;
+   border: none;
+   border-radius: .3rem;
+   padding-left: 2rem;
+   padding-right: 2rem;
+   padding-top: .6rem;
+   padding-bottom: .6rem;
+   cursor: pointer;
+}
+
+.comm-postBtn-container {
+   margin-right: 2rem;
+}

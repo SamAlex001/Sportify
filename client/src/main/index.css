@@ -1,3 +1,9 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
 /* 
 Primary: #397367 
 Secondary: #5DA399

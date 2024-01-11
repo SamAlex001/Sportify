@@ -15,7 +15,7 @@ export const SignUp = () => {
     // Passing User Data
     async function Register(ev) {
         ev.preventDefault();
-        const response = await fetch('http://localhost:4000/register', {
+        const response = await fetch('http://localhost:4000/auth/signup', {
             method: 'POST',
             body: JSON.stringify({ username, email, password }),
             headers: { 'Content-Type': 'application/json' },
