@@ -1,7 +1,7 @@
 import '../styles/post.css';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom'
-import { PostComments } from './PostComments';
+// import { PostComments } from './PostComments';
 
 export const Post = (
     { _id, title, summary, cover, content, createdAt, author }
@@ -11,7 +11,7 @@ export const Post = (
     return (
         <div className="post-container">
             <div className="post-cover" onClick={() => navigate(`/post/${_id}`)}>
-                <img src={'http://localhost:4000/posts/post/' + cover} alt="COVER_IMG_NOT_LOADING" />
+                <img src={`/uploads/${cover}}`} alt="COVER_IMG_NOT_LOADING" />
             </div>
             <div className="post-details">
                 <div className="post-title" onClick={() => navigate(`/post/${_id}`)}>{title}</div>

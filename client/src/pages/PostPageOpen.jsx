@@ -2,35 +2,47 @@ import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import '../styles/postPageOpen.css';
 import { PostComments } from "../components/PostComments";
+import { Comment } from "../components/Comments";
+import '../styles/postPageOpen.css';
 
 export const PostPageOpen = () => {
 
     const navigate = useNavigate();
     const { userInfo, setUserInfo } = useContext(UserContext);
     const [postInfo, setPostInfo] = useState(null);
+    const [commentInfo, setCommentInfo] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
+
+        // USER PROFILE Fetching
         fetch(`http://localhost:4000/user/profile`, {
             credentials: 'include'
-        })
-            .then(response => {
-                response.json().then(userInfo => {
-                    setUserInfo(userInfo)
-                });
+        }).then(response => {
+            response.json().then(userInfo => {
+                setUserInfo(userInfo)
+                // console.log(userIfno)
             });
+        });
 
+        // VIEW POSTS
         fetch(`http://localhost:4000/posts/viewpost/${id}`)
             .then(response => {
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);
+                    // console.log(postInfo)
                 });
             });
-    }, []);
 
-    // console.log(userInfo);
+        // GET COMMENTS
+        fetch('http://localhost:4000/comments/getcomment/' + id)
+            .then(response => response.json()
+                .then(commentInfo => {
+                    setCommentInfo(commentInfo);
+                    console.log(commentInfo)
+                }));
+    }, []);
 
     if (!postInfo) return ''; // return empty string for no post
 
@@ -57,13 +69,18 @@ export const PostPageOpen = () => {
                 </div>
             </div>
             <div className="postOpen-cover-container">
-                <img src={`http://localhost:4000/uploads/${postInfo.cover}`} alt="IMG_NOT_LOADING" />
+                <img src={`http://localhost:4000/${postInfo.cover}`} alt="IMG_NOT_LOADING" />
             </div>
             <div className="postOpen-contentWrapper"
                 dangerouslySetInnerHTML={{ __html: postInfo.content }}
             >{/* Put Content here*/}</div>
             <div className="postOpen-comment">
                 <PostComments />
+            </div>
+            <div className="postOpen-commentStack">
+                {commentInfo?.map((commentInfo) =>
+                    <Comment key={commentInfo.id} commentInfoInput={commentInfo} postInfoInput={postInfo} />
+                )}
             </div>
         </div>
     )

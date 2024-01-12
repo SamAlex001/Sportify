@@ -1,59 +1,72 @@
-import { MdDelete } from "react-icons/md";
 import '../styles/postComments.css';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export const PostComments = () => {
 
-   const { userInfo, setUserInfo } = useContext(UserContext);
-   const [postInfo, setPostInfo] = useState(null);
-   const [commentsInfo, setCommentsInfo] = useState('');
    const { id } = useParams();
+   const { userInfo } = useContext(UserContext);
+   const [comment, setComment] = useState('');
+   const [postId, setPostId] = useState('');
+   const [postAuthor, setPostAuthor] = useState('');
+   const [username, setUsername] = useState('');
+   const [userId, setUserId] = useState('');
 
    useEffect(() => {
-      fetch(`http://localhost:4000/posts/viewpost/${id}`)
-         .then(response => {
-            response.json().then(postInfo => {
-               setPostInfo(postInfo);
-            });
-         });
+      setUsername(userInfo.username);
+      setUserId(userInfo.id);
+
+      fetch('http://localhost:4000/posts/viewpost/' + id)
+         .then(response => response.json()
+            .then(postInfo => {
+               setPostId(postInfo._id);
+               setPostAuthor(postInfo.author.username);
+            }))
    }, []);
+   // console.log(postId)
 
+   async function postComment(e) {
+      e.preventDefault();
+      const data = new FormData();
+      data.set('comment', comment);
+      data.set('postId', postId);
 
-   function deleteComment() {
-      // DELETE comment
+      if (comment === '') { alert('Write a comment before posting') }
+      else {
+         const response = await fetch('http://localhost:4000/comments/postcomment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+               comment: comment,
+               author: username,
+               postId: postId,
+               userId: userId,
+               postAuthor: postAuthor
+            }),
+            credentials: 'include',
+         });
+         if (response.ok) {
+            setComment('')
+            alert('Comment Posted')
+         }
+      }
    }
-   
-   // console.log(userInfo)
-   // console.log(postInfo)
 
    return (
       <div className="comm-container">
-         <div className="comm-author-delete-wrapper">
-            <div className="comm-author">@author</div>
-            {/* 
-            <p>{new Date(c.updatedAt).toString().slice(0,15)}</p>
-            <p>{new Date(c.updatedAt).toString().slice(16,24)}</p> 
-            */}
-            {userInfo.username === userInfo.username &&
-               <div className="comm-delete"
-                  onClick={() => deleteComment()}
-               >
-                  <MdDelete className="comm-del-icon" />
-               </div>
-            }
-         </div>
-         <div className="comm-content-container">
+         <form onSubmit={postComment} className="comm-content-container" >
             <div className="comm-content">
-               Hello! Comment Section Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam, nesciunt. Delectus, fugit fuga.
-               Magni sapiente temporibus, distinctio laudantium fugiat alias? Nulla ex minima atque hic? Aliquid suscipit culpa hic nam?
+               <textarea type="text"
+                  value={comment}
+                  onChange={(e) => { setComment(e.target.value) }}
+                  placeholder='Comment here'
+               />
             </div>
             <div className="comm-postBtn-container">
-               <button className="comm-post-btn ">Post</button>
+               <button className="comm-post-btn">Post</button>
             </div>
-         </div>
+         </form>
       </div>
    )
 }

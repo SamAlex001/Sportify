@@ -7,8 +7,8 @@ import '../styles/home.css';
 export const Home = () => {
 
     const navigate = useNavigate();
-    const { userInfo, setUserInfo } = useContext(UserContext); // Calling username from context
-    const username = userInfo?.username; // Check if userInfo is null, if false then give username
+    const { userInfo, setUserInfo } = useContext(UserContext); 
+    const username = userInfo?.username; 
 
     // USER STATUS: Logged In or Not
     useEffect(() => {
@@ -38,6 +38,7 @@ export const Home = () => {
             {!username && <button onClick={() => { navigate('/signup') }}>Sign Up</button>}
             {!username && <button onClick={() => { navigate('/login') }}>Login</button>}
             {username && <button onClick={() => { navigate('/createPost') }}>Create Post</button>}
+            {username && <button onClick={() => { navigate(`/profilePage/${userInfo.id}`) }}>View Profile </button>}
             <PostPage />
         </div>
     )

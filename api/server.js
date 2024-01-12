@@ -15,13 +15,15 @@ const PORT = 4000
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/comment",commentRoute);
+app.use("/comments", commentRoute);
 app.use("/auth", authRoute);
 app.use("/posts", postRoute);
 app.use("/user", userRoute);
 
 // MONGODB Password: 8OTq3CcEClnYJR0m
-mongoose.connect('mongodb+srv://sam:8OTq3CcEClnYJR0m@sportify.aluisxu.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://sam:8OTq3CcEClnYJR0m@sportify.aluisxu.mongodb.net/test?retryWrites=true&w=majority')
+    .then(() => {console.log("DB Connected Successfully")
+    }).catch((error) => console.log("DB Connection Faile, Error:", error))
 
 app.listen(PORT, () => {
     console.log(`Server Running at Port:${PORT}`);

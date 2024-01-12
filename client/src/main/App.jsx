@@ -8,6 +8,7 @@ import { PostPageOpen } from '../pages/PostPageOpen';
 import { SignUp } from '../pages/Signup';
 import { UserContextProvider } from '../context/UserContext';
 import './App.css';
+import { ProfilePage } from '../pages/ProfilePage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/post' element={<PostPage />} />
         <Route path='/post/:id' element={<PostPageOpen />} />
         <Route path='/editPost/:id' element={<EditPost />} />
+        <Route path='/profilePage/:id' element={<ProfilePage />} />
       </Routes>
     </UserContextProvider>
   )

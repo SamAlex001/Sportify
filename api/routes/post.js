@@ -7,14 +7,14 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
-const uploadMiddleware = multer({ dest : './uploads' });
+const uploadMiddleware = multer({ dest: './uploads' });
 
 // AUTHETICATION & VERIFICATION
 const salt = bcrypt.genSaltSync(10);
 const secret = 'abcxyz';
 
 // MIDDLEWARE
-app.use("/uploads", express.static(path.join(__dirname, './uploads'))); // to access img from uploads folder
+app.use("/uploads", express.static(__dirname + './uploads')); // to access img from uploads folder
 
 // GET Post Endpoint
 router.get('/getpost', async (req, res) => {
@@ -86,8 +86,8 @@ router.put('/updatepost', uploadMiddleware.single('file'), async (req, res) => {
 });
 
 // DELETE Post Endpoint
-router.delete('/deletepost', async (req, res) => {
-   res.json('ok');
-})
+// router.delete('/deletepost', async (req, res) => {
+//    res.json('ok');
+// })
 
 module.exports = router
