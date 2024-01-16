@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
 import { Post } from "../components/Post";
 
-export const PostPage = () => {
+export const PostPage = ({ search }) => {
 
-    // to show posts
-    const [posts, setPosts] = useState('');
+    // SHOW posts
+    const [posts, setPosts] = useState([]);
+    const searchPost = search ? posts.filter(post => search.includes(post._id)) : posts; // Show searched posts or all
 
     // Fetching Post
-    useEffect(() => {
+    function getPost() {
         fetch('http://localhost:4000/posts/getpost').then(response => {
             response.json().then(posts => {
                 setPosts(posts);
             });
         });
+    }
+
+    useEffect(() => {
+        getPost();
     }, []);
 
     return (
         <div>
-            {posts.length > 0 && posts.map(post => (
-                    <Post {...post} />
-                ))
+            {searchPost && searchPost.length > 0
+                ? (searchPost.map(searchedPost => <Post key={searchedPost._id} {...searchedPost} />))
+                : (posts.map(post => <Post key={post._id} {...post} />))
             }
         </div>
     )

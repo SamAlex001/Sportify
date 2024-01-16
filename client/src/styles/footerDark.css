@@ -1,0 +1,49 @@
+.footer {
+   display: flex;
+   justify-content: space-between;
+   background-color: #397367;
+   padding: 50px;
+   margin: 50px;
+   
+}
+
+.footer-content h3  {
+   color: #fff;
+}
+
+.footer-profile img {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   
+}
+
+.footer p{
+   color: white;
+}
+
+.footer-content ul{
+   text-align: left;
+   
+
+}
+
+.footer-content ul1{
+   text-align: right;
+}
+.footer-text p{
+   text-align: left;
+
+}
+
+.footer-icon{
+   text-align: center;
+   text-indent: 10px;
+   font-size: 20px;
+   color: #000;
+   margin-right: 15px;
+   padding: 170px;
+}
+
+
+

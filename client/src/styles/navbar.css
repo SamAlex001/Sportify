@@ -1,0 +1,44 @@
+.navbar {
+   background-color:whitesmoke;
+   height: 64px;
+   display: flex;
+   align-items: center;
+
+  }
+  
+  .brand-logo {
+   color: black;
+   padding-left: 15px;
+   font-size: 20px;
+   font-weight: bold;
+  }
+  
+  .navbar ul {
+
+   display: flex;
+   align-items: center;
+   padding-right: 15px;
+  }
+  
+  .navbar ul li {
+   color: black;
+   text-decoration: none;
+   padding: 5px 10px;
+   margin: 12px;
+  }
+  
+  .navbar ul li :hover {
+   background-color: rgba(0, 0, 0, 0.2);
+  }
+
+.navbar button{
+   color-scheme: black;
+    color:white;
+    background-color: #397367;
+}
+
+
+.navbar a{
+   color: black;
+}
+

@@ -9,6 +9,7 @@ export const CreatePost = () => {
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
     const [files, setFiles] = useState('');
+    const [category, setCategory] = useState('');
 
     async function createPost(e) {
         e.preventDefault();
@@ -18,6 +19,7 @@ export const CreatePost = () => {
         data.set('summary', summary);
         data.set('file', files[0]);
         data.set('content', content);
+        data.set('category', category);
 
         const response = await fetch('http://localhost:4000/posts/createpost/', {
             method: 'POST',
@@ -44,6 +46,11 @@ export const CreatePost = () => {
                     value={summary}
                     onChange={(e) => { setSummary(e.target.value) }} />
                 <br /><br />
+                {/* <input type="category"
+                    placeholder={'Category'}
+                    value={category}
+                    onChange={(e) => { setCategory(e.target.value) }} />
+                <br /><br /> */}
                 <input type="file"
                     onChange={(e) => { setFiles(e.target.files) }} />
                 <br /><br />

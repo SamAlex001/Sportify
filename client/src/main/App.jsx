@@ -1,3 +1,4 @@
+import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { CreatePost } from '../pages/CreatePost';
 import { PostPage } from '../pages/PostPage';
@@ -7,8 +8,8 @@ import { Login } from '../pages/Login';
 import { PostPageOpen } from '../pages/PostPageOpen';
 import { SignUp } from '../pages/Signup';
 import { UserContextProvider } from '../context/UserContext';
-import './App.css';
 import { ProfilePage } from '../pages/ProfilePage';
+import { HomePage } from '../pages/HomePage';
 
 function App() {
   return (

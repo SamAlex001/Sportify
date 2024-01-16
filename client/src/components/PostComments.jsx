@@ -51,6 +51,7 @@ export const PostComments = () => {
             alert('Comment Posted')
          }
       }
+      window.location.reload();
    }
 
    return (

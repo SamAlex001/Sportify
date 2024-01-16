@@ -1,17 +1,15 @@
 import '../styles/post.css';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom'
-// import { PostComments } from './PostComments';
 
-export const Post = (
-    { _id, title, summary, cover, content, createdAt, author }
-) => {
+export const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
 
     const navigate = useNavigate();
+
     return (
         <div className="post-container">
             <div className="post-cover" onClick={() => navigate(`/post/${_id}`)}>
-                <img src={`/uploads/${cover}}`} alt="COVER_IMG_NOT_LOADING" />
+                <img src={`${cover}`} alt="COVER_IMG_NOT_LOADING" />
             </div>
             <div className="post-details">
                 <div className="post-title" onClick={() => navigate(`/post/${_id}`)}>{title}</div>
@@ -22,9 +20,6 @@ export const Post = (
                 <br />
                 <br />
                 <button className='post-read-btn' onClick={() => navigate(`/post/${_id}`)}>Read Now</button>
-            </div>
-            <div className="post-comment">
-                {/* <PostComments comment={comments} post={`${_id}`} /> */}
             </div>
         </div>
     )

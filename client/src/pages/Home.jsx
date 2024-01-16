@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { PostPage } from "./PostPage";
 import '../styles/home.css';
+import { Post } from "../components/Post";
+import { SearchBar } from "../components/SearchBar";
 
 export const Home = () => {
 
     const navigate = useNavigate();
-    const { userInfo, setUserInfo } = useContext(UserContext); 
-    const username = userInfo?.username; 
+    const { userInfo, setUserInfo } = useContext(UserContext);
+    const username = userInfo?.username;
 
-    // USER STATUS: Logged In or Not
-    useEffect(() => {
+    function userLoggedIn() {
         fetch('http://localhost:4000/user/profile', {
             credentials: 'include',
         }).then((response) => {
@@ -19,6 +20,11 @@ export const Home = () => {
                 setUserInfo(userInfo);
             });
         });
+    }
+    // USER STATUS: Logged In or Not
+    useEffect(() => {
+        navigate('/')
+        userLoggedIn();
     }, []);
 
     // LOGOUT Function
@@ -29,7 +35,7 @@ export const Home = () => {
         });
         setUserInfo(null);
     }
-    
+
     return (
         <div>
             <h1>Home Page</h1>
@@ -39,7 +45,8 @@ export const Home = () => {
             {!username && <button onClick={() => { navigate('/login') }}>Login</button>}
             {username && <button onClick={() => { navigate('/createPost') }}>Create Post</button>}
             {username && <button onClick={() => { navigate(`/profilePage/${userInfo.id}`) }}>View Profile </button>}
-            <PostPage />
+            <br /><br />
+            <SearchBar />
         </div>
     )
 }

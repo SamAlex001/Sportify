@@ -6,7 +6,7 @@ const app = express();
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const uploadMiddleware = multer({ dest: './client/uploads' });
+const uploadMiddleware = multer({ dest: './uploads' });
 
 // AUTHETICATION & VERIFICATION
 const salt = bcrypt.genSaltSync(10);
@@ -89,29 +89,8 @@ router.put('/updatepost', uploadMiddleware.single('file'), async (req, res) => {
 });
 
 // DELETE Post Endpoint
-router.delete('/deletepost/:id', async (req, res) => {
-   const { id } = req.params;
-   try {
-      const deletePost = await Post.findByIdAndDelete(id);
-      res.status(200).json({ message: "Post Deleted" });
-      console.log("Post Deleted!");
-   } catch (error) {
-      console.log("Error: ", error);
-   }
-});
-
-// SEARCH Post Endpoint 
-router.get('/searchPost', async (req, res) => {
-   const query = req.query;
-   try {
-      const searchFilter = {
-         title: { $regex: query.search, $options: 'i' } // options -> i=uppercase
-      }
-      const searchPosts = await Post.find(query.search ? searchFilter : null);
-      res.status(200).json(searchPosts);
-   } catch (error) {
-      console.log("Error: ", error);
-   }
-});
+// router.delete('/deletepost', async (req, res) => {
+//    res.json('ok');
+// })
 
 module.exports = router

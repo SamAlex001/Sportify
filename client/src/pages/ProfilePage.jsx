@@ -1,7 +1,7 @@
 import '../styles/profilePage.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/UserContext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const ProfilePage = () => {
 
@@ -11,6 +11,7 @@ export const ProfilePage = () => {
    const [userEmail, setUserEmail] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPass, setConfirmPass] = useState('');
+   const navigate = useNavigate();
 
    useEffect(() => {
       fetch('http://localhost:4000/user/viewprofile/' + id, {
@@ -18,26 +19,27 @@ export const ProfilePage = () => {
       }).then((response) => {
          response.json().then(userInfo => {
             setUserInfo(userInfo.userDoc);
-            // console.log(userInfo)
+            console.log(userInfo)
             setUsername(userInfo.userDoc.username);
             setUserEmail(userInfo.userDoc.email);
          });
       });
    }, []);
 
+   //console.log(userInfo)
    // console.log(username);
    // console.log(userEmail);
    // console.log(password);
-
+   // console.log(password)
+   // console.log(confirmPass)
+  
    async function updateUserDetails(e) {
       e.preventDefault();
 
-      const data = new FormData();
       const newUserName = username;
       const newEmail = userEmail;
-      const newPassword = confirmPass;
-
-      if (!(password === confirmPass)) alert('Enter Correct Password on both fields')
+      const newPassword = password !== '' && confirmPass !== '' ? confirmPass : userInfo.password;
+      if (!(password === confirmPass)) alert('Enter Correct Password on both fields');
 
       const response = await fetch('http://localhost:4000/user/updateprofile/' + id, {
          method: 'PUT',
@@ -55,7 +57,10 @@ export const ProfilePage = () => {
 
    return (
       <div className="prof-container">
+         <button onClick={() => navigate('/')}>Go Back</button>
+         <br /><br />
          Profile Page
+         <br /><br />
          <form className="prof-content-container" onSubmit={updateUserDetails}>
             <div className="prof-username">
                Username: <input type="text"

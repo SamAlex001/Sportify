@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
 const commentRoute = require('./routes/comment');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/post');

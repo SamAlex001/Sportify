@@ -31,7 +31,7 @@ export const PostPageOpen = () => {
             .then(response => {
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);
-                    // console.log(postInfo)
+                    // console.log(postInfo.cover)
                 });
             });
 
@@ -40,7 +40,7 @@ export const PostPageOpen = () => {
             .then(response => response.json()
                 .then(commentInfo => {
                     setCommentInfo(commentInfo);
-                    console.log(commentInfo)
+                    // console.log(commentInfo)
                 }));
     }, []);
 
@@ -69,7 +69,7 @@ export const PostPageOpen = () => {
                 </div>
             </div>
             <div className="postOpen-cover-container">
-                <img src={`http://localhost:4000/${postInfo.cover}`} alt="IMG_NOT_LOADING" />
+                <img src={`/uploads/${postInfo.cover.replace(/^uploads\\/i, '')}`} alt="IMG_NOT_LOADING" />
             </div>
             <div className="postOpen-contentWrapper"
                 dangerouslySetInnerHTML={{ __html: postInfo.content }}

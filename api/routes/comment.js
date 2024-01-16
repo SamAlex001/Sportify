@@ -23,8 +23,9 @@ router.post("/postcomment", async (req, res) => {
 
 // GET Post Comments Endpoint
 router.get("/getcomment/:postId", async (req, res) => {
+   const { postId } = req.params;
    try {
-      const comments = await Comment.find({ postId: req.params.postId })
+      const comments = await Comment.find({ postId })
       res.status(200).json(comments)
    }
    catch (err) {
@@ -44,12 +45,18 @@ router.put("/updatecomment/:id", async (req, res) => {
 
 // DELETE Comment Endpoint
 router.delete("/deletecomment/:id", async (req, res) => {
+   const { id } = req.params;
    try {
-      await Comment.findByIdAndDelete(req.params.id)
-      res.status(200).json("Comment has been deleted!")
-   }
-   catch (err) {
-      res.status(500).json(err)
+      const deletedComment = await Comment.findByIdAndDelete(id);
+      if (!deletedComment) {
+         console.log("Comment Not Found!");
+         return res.status(404).json({ error: "Comment not found" });
+      }
+      console.log(`Comment with ID ${id} has been deleted.`);
+      res.status(200).json("Comment has been deleted!");
+   } catch (err) {
+      console.error("Error deleting comment:", err);
+      res.status(500).json({ error: "Internal Server Error" });
    }
 });
 

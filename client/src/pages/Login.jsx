@@ -1,6 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
-import Logo from "../assets/Login_SignUP_Logo.png"
 import '../styles/login.css';
+import Logo from "../assets/Login_SignUP_Logo.png"
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
@@ -8,7 +8,7 @@ import { UserContext } from "../context/UserContext";
 export const Login = () => {
 
     const navigate = useNavigate();
-
+    const { userInfo } = useContext(UserContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -25,8 +25,7 @@ export const Login = () => {
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
-                navigate('/'); // home.jsx
-                setRedirect(!redirect); // set redirect = true
+                setRedirect(!redirect);
             })
             alert('Login Successfull');
         } else {
@@ -35,8 +34,7 @@ export const Login = () => {
     }
 
     // Authenticated User redirected to home page
-    if (redirect) {
-    }
+    if (redirect) { navigate('/'); }
 
     return (
         <div className='login-main-contianer'>
