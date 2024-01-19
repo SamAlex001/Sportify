@@ -11,15 +11,20 @@ const secret = 'abcxyz';
 // GET User Info Endpoint: Check Login Status
 router.get('/profile', (req, res) => {
     const { token } = req.cookies;
+    // console.log("Received Token: ", token)
+
     // VERIFY JWT Token
-    jwt.verify(token, secret, {}, (error, info) => {
-        if (error) {
-            console.error('JWT Verification Error:', error);
-            res.status(401).json({ error: 'Unauthorized' });
-        }
-        res.json(info); // info => JWT response
-    });
     try {
+        if (token) {
+            jwt.verify(token, secret, {}, (error, info) => {
+                if (error) {
+                    console.error('JWT Verification Error:', error);
+                    res.status(401).json({ error: 'Unauthorized' });
+                }
+                res.json(info); // info => JWT response
+            });
+        }
+        // if (!token) { console.log("Empty Token Recieved"); }
     } catch (error) {
         console.error('Error fetching user profile:', error);
         res.status(500).json({ 'error': 'Internal Server Error' })

@@ -12,3 +12,11 @@ Tertiary: #FFFFFF
 Black 01: #252525
 Black 02: #35393C
 */
+
+:root {
+   --prim: #397367;
+   --seco: #5DA399;
+   --tert: #FFFFFF;
+   --B01: #252525;
+   --B02: #35393C;
+}

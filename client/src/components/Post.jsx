@@ -1,15 +1,18 @@
 import '../styles/post.css';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
 
+    const URL = "http://localhost:5173/"
     const navigate = useNavigate();
+    const adjustedCover = cover.substring(10);
+    // console.log(adjustedCover)
 
     return (
         <div className="post-container">
             <div className="post-cover" onClick={() => navigate(`/post/${_id}`)}>
-                <img src={`${cover}`} alt="COVER_IMG_NOT_LOADING" />
+                <img src={URL+adjustedCover} alt="COVER_IMG_NOT_LOADING" />
             </div>
             <div className="post-details">
                 <div className="post-title" onClick={() => navigate(`/post/${_id}`)}>{title}</div>

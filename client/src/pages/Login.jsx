@@ -11,7 +11,6 @@ export const Login = () => {
     const { userInfo } = useContext(UserContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
     const { setUserInfo } = useContext(UserContext);
 
     async function Login(e) {
@@ -25,16 +24,13 @@ export const Login = () => {
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
-                setRedirect(!redirect);
+                navigate("/")
             })
-            alert('Login Successfull');
+            console.log('Login Successfull');
         } else {
-            alert('Login Failed');
+            console.log('Login Failed');
         }
     }
-
-    // Authenticated User redirected to home page
-    if (redirect) { navigate('/'); }
 
     return (
         <div className='login-main-contianer'>

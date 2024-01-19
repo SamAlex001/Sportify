@@ -12,6 +12,9 @@ export const PostPageOpen = () => {
     const { userInfo, setUserInfo } = useContext(UserContext);
     const [postInfo, setPostInfo] = useState(null);
     const [commentInfo, setCommentInfo] = useState(null);
+    const [postCover, setPostCover] = useState('');
+    const adjustedCover = postCover.substring(10);
+    const URL = "http://localhost:5173/"
     const { id } = useParams();
 
     useEffect(() => {
@@ -31,7 +34,7 @@ export const PostPageOpen = () => {
             .then(response => {
                 response.json().then(postInfo => {
                     setPostInfo(postInfo);
-                    // console.log(postInfo.cover)
+                    setPostCover(postInfo.cover);
                 });
             });
 
@@ -43,6 +46,8 @@ export const PostPageOpen = () => {
                     // console.log(commentInfo)
                 }));
     }, []);
+    // console.log(adjustedCover)
+    // console.log(postCover);
 
     if (!postInfo) return ''; // return empty string for no post
 
@@ -69,7 +74,7 @@ export const PostPageOpen = () => {
                 </div>
             </div>
             <div className="postOpen-cover-container">
-                <img src={`/uploads/${postInfo.cover.replace(/^uploads\\/i, '')}`} alt="IMG_NOT_LOADING" />
+                <img src={URL+adjustedCover} alt="IMG_NOT_LOADING" />
             </div>
             <div className="postOpen-contentWrapper"
                 dangerouslySetInnerHTML={{ __html: postInfo.content }}

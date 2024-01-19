@@ -6,14 +6,15 @@ const app = express();
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const uploadMiddleware = multer({ dest: './client/uploads' });
+const path = require('path')
+const uploadMiddleware = multer({ dest: '../client/uploads'});
 
 // AUTHETICATION & VERIFICATION
 const salt = bcrypt.genSaltSync(10);
 const secret = 'abcxyz';
 
-// MIDDLEWARE
-app.use("/uploads", express.static('uploads')); // to access img from uploads folder
+// MULTER MIDDLEWARE
+app.use("/uploads", express.static(path.join(__dirname, '/uploads')));
 
 // GET Post Endpoint
 router.get('/getpost', async (req, res) => {
@@ -55,8 +56,8 @@ router.post('/createpost', uploadMiddleware.single('file'), async (req, res) => 
       res.json(postDoc);
       // console.log(postDoc) 
    });
-   console.log(originalname)
-   console.log(newPath)
+   // console.log(originalname)
+   // console.log(newPath)
 });
 
 // UPDATE Post Endpoint

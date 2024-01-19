@@ -9,7 +9,7 @@ import { PostPageOpen } from '../pages/PostPageOpen';
 import { SignUp } from '../pages/Signup';
 import { UserContextProvider } from '../context/UserContext';
 import { ProfilePage } from '../pages/ProfilePage';
-import { HomePage } from '../pages/HomePage';
+import { LiveScore } from '../pages/LiveScore';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
         <Route path='/post/:id' element={<PostPageOpen />} />
         <Route path='/editPost/:id' element={<EditPost />} />
         <Route path='/profilePage/:id' element={<ProfilePage />} />
+        <Route path='/liveScore' element={<LiveScore />} />
       </Routes>
     </UserContextProvider>
   )

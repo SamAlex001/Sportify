@@ -6,8 +6,8 @@ import { useState } from "react";
 
 export const SignUp = () => {
 
-    const [redirect, setRedirect] = useState(false);
     const navigate = useNavigate();
+    const [redirect, setRedirect] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,16 +21,14 @@ export const SignUp = () => {
             headers: { 'Content-Type': 'application/json' },
         });
         if (response.status === 200) {
-            setRedirect(!redirect);
+            setRedirect(true);
             alert('Sign Up Successfull');
         } else {
             alert('Sign Up Failed');
         }
     }
 
-    if (redirect) {
-        navigate('/login');
-    }
+    if (redirect) { navigate('/login'); }
 
     return (
         <div className='signup-main-contianer'>

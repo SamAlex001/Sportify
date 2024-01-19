@@ -6,7 +6,6 @@ export const EditPost = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const [redirect, setRedirect] = useState(false);
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
@@ -46,12 +45,9 @@ export const EditPost = () => {
             credentials: 'include',
         });
         if (response.ok) {
+            navigate('/post/' + id);
             alert('Post Updated Sucessfully')
-            setRedirect(!redirect);
         }
-    }
-    if (redirect) {
-        navigate('/post/' + id);
     }
 
     return (

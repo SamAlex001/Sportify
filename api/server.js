@@ -2,11 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const multer = require('multer');
 const commentRoute = require('./routes/comment');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/post');
 const userRoute = require('./routes/user');
+const liveScoreRoute = require('./routes/livescore');
 const app = express();
 
 // PORT for server to run/listen
@@ -20,10 +20,12 @@ app.use("/comments", commentRoute);
 app.use("/auth", authRoute);
 app.use("/posts", postRoute);
 app.use("/user", userRoute);
+app.use("/livescore", liveScoreRoute);
 
 // MONGODB Password: 8OTq3CcEClnYJR0m
 mongoose.connect('mongodb+srv://sam:8OTq3CcEClnYJR0m@sportify.aluisxu.mongodb.net/test?retryWrites=true&w=majority')
-    .then(() => {console.log("DB Connected Successfully")
+    .then(() => {
+        console.log("DB Connected Successfully")
     }).catch((error) => console.log("DB Connection Faile, Error:", error))
 
 app.listen(PORT, () => {

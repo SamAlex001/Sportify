@@ -1,0 +1,10 @@
+.livescore-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.score-card {
+   width: 38%;
+   margin-bottom: 10px;
+}
