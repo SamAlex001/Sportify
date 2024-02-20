@@ -108,3 +108,10 @@
     text-transform: capitalize;
     cursor: pointer;
 }
+
+.login-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8%;
+}

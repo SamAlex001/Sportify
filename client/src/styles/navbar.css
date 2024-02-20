@@ -1,5 +1,5 @@
 .navbar {
-   background-color:whitesmoke;
+   background-color: whitesmoke;
    height: 64px;
    display: flex;
    align-items: center;
@@ -31,7 +31,7 @@
    color: black;
 }
 
-#home-create-post {
+#navbar-create-post {
    border: none;
    padding: 0.4rem;
    border-radius: .2rem;
@@ -41,33 +41,54 @@
    cursor: pointer;
 }
 
-#home-create-post:hover {
+#navbar-create-post:hover {
    color: white;
    background-color: #397367c8;
 }
 
-.home-user-login,
-.home-user-logout {
+.navbar-user-login-signup-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: .4rem;
+}
+
+.navbar-user-login-btn {
    border: none;
-   padding: 0.4rem;
+   padding: 0.34rem;
    border-radius: .2rem;
-   color-scheme: black;
-   color: black;
+   background-color: #397367;
+   color: white;
    cursor: pointer;
 }
 
-.home-user-logout-container {
+.navbar-user-logout-btn,
+.navbar-user-profile-btn {
+   width: 90%;
+   border: none;
+   padding: 0.4rem;
+   border-radius: .2rem;
+   background-color: rgb(255, 255, 255, .2);
+   color: var(--tert);
+   cursor: pointer;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   gap: .2rem;
+}
+
+.navbar-user-settings {
    position: relative;
    cursor: pointer;
 }
 
-.home-user-logout {
+.navbar-user-logout-btn {
    position: absolute;
-   top: 2.5rem;
-   right: 0.1rem;
+   top: 3.5rem;
+   right: 0.4rem;
 }
 
-.home-username {
+.navbar-username {
    display: flex;
    justify-content: center;
    align-items: center;
@@ -75,4 +96,34 @@
 
 .navbar-user-icon {
    margin-right: 0.6rem;
+}
+
+.navber-user-options-icon {
+   font-size: 1rem;
+}
+
+.navbar-user-profile-btn {
+   position: absolute;
+   top: 1rem;
+   right: 0.4rem;
+}
+
+.navbar-options-arrow {
+   position: absolute;
+   top: -0.9rem;
+   right: 3.3rem;
+   font-size: 1.4rem;
+   color: #397367;
+}
+
+.navbar-user-options-wrapper {
+   position: absolute;
+   top: 2.48rem;
+   left: -2rem;
+   padding-left: 4rem;
+   padding-right: 4rem;
+   padding-top: 2rem;
+   padding-bottom: 4.2rem;
+   border-radius: .4rem;
+   background-color: var(--prim);
 }

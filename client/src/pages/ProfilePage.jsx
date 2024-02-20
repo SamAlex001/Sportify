@@ -2,6 +2,7 @@ import '../styles/profilePage.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Navbar } from '../components/Navbar';
 
 export const ProfilePage = () => {
 
@@ -11,28 +12,57 @@ export const ProfilePage = () => {
    const [userEmail, setUserEmail] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPass, setConfirmPass] = useState('');
+   const [userLoggedIn, setUserLoggedIn] = useState(false);
+   const [clicked, setClicked] = useState(false);
    const navigate = useNavigate();
 
-   useEffect(() => {
-      fetch('http://localhost:4000/user/viewprofile/' + id, {
-         credentials: 'include',
-      }).then((response) => {
+   async function checkUserStatus() {
+      try {
+         const response = await fetch('http://localhost:4000/user/profile', {
+            credentials: 'include'
+         });
+         if (response.ok) {
+            const userInfo = await response.json();
+            setUserLoggedIn(true);
+            setUserInfo(userInfo);
+         } else if (response.status === 401) {
+            setUserLoggedIn(false);
+            console.log("401 ERROR: Unauthorized User!");
+         }
+      } catch (error) {
+         console.error("Error Checking User Status: ", error);
+      }
+   }
+
+   async function viewProfile() {
+      const response = await fetch(`http://localhost:4000/user/viewprofile/${id}`, {
+         credentials: 'include'
+      });
+      if (response.ok) {
          response.json().then(userInfo => {
+            // console.log(userInfo);
             setUserInfo(userInfo.userDoc);
-            console.log(userInfo)
             setUsername(userInfo.userDoc.username);
             setUserEmail(userInfo.userDoc.email);
          });
-      });
+      } else {
+         console.error("No Response");
+      }
+   }
+   
+
+   useEffect(() => {
+      viewProfile();
+      checkUserStatus();
    }, []);
 
-   //console.log(userInfo)
+   // console.log(userInfo)
    // console.log(username);
    // console.log(userEmail);
    // console.log(password);
    // console.log(password)
    // console.log(confirmPass)
-  
+
    async function updateUserDetails(e) {
       e.preventDefault();
 
@@ -56,37 +86,36 @@ export const ProfilePage = () => {
    }
 
    return (
-      <div className="prof-container">
-         <button onClick={() => navigate('/')}>Go Back</button>
-         <br /><br />
-         Profile Page
-         <br /><br />
-         <form className="prof-content-container" onSubmit={updateUserDetails}>
-            <div className="prof-username">
-               Username: <input type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)} />
-            </div>
-            <div className="prof-email">
-               Email: <input type="email"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-               />
-            </div>
-            <div className="prof-password">
-               Update Password: <input type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-               />
-            </div>
-            <div className="prof-password">
-               Confirm Password: <input type="password"
-                  value={confirmPass}
-                  onChange={(e) => setConfirmPass(e.target.value)}
-               />
-            </div>
-            <button>Update Profile</button>
-         </form>
-      </div>
+      <>
+         <Navbar />
+         <div className="prof-container">
+            <form className="prof-content-container" onSubmit={updateUserDetails}>
+               <div className="prof-username">
+                  Username: <input type="text"
+                     value={username}
+                     onChange={(e) => setUsername(e.target.value)} />
+               </div>
+               <div className="prof-email">
+                  Email: <input type="email"
+                     value={userEmail}
+                     onChange={(e) => setUserEmail(e.target.value)}
+                  />
+               </div>
+               <div className="prof-password">
+                  Update Password: <input type="password"
+                     value={password}
+                     onChange={(e) => setPassword(e.target.value)}
+                  />
+               </div>
+               <div className="prof-password">
+                  Confirm Password: <input type="password"
+                     value={confirmPass}
+                     onChange={(e) => setConfirmPass(e.target.value)}
+                  />
+               </div>
+               <button>Update Profile</button>
+            </form>
+         </div>
+      </>
    )
 }

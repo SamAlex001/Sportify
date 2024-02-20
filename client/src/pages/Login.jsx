@@ -1,10 +1,11 @@
-import { FcGoogle } from "react-icons/fc";
 import '../styles/login.css';
 import Logo from "../assets/Login_SignUP_Logo.png"
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { Navbar } from "../components/Navbar";
+import { LoginModal } from "../components/Modal";
+import { Loader } from '../components/Loaders';
 
 export const Login = () => {
 
@@ -13,7 +14,16 @@ export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { setUserInfo } = useContext(UserContext);
+
+    const toggleModal = () => {
+        setModalOpen(!modalOpen);
+    }
+
+    const toggleLoading = () => {
+        setLoading(!loading);
+    }
 
     async function Login(e) {
         e.preventDefault();
@@ -26,9 +36,12 @@ export const Login = () => {
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
-                navigate("/")
+                toggleModal();
+                toggleLoading();
+                setTimeout(() => {
+                    navigate("/");
+                }, 1000);
             })
-            console.log('Login Successfull');
         } else {
             console.log('Login Failed');
         }
@@ -37,7 +50,7 @@ export const Login = () => {
     return (
         <>
             <Navbar />
-            <div className='login-main-contianer'>
+            {!loading && <div className='login-main-contianer'>
                 <div className="logo-container">
                     <img src={Logo} alt="Sportify_Logo" />
                 </div>
@@ -59,7 +72,12 @@ export const Login = () => {
                         don't have an account? click here to sign up
                     </button>
                 </div>
-            </div>
+            </div>}
+            <LoginModal isOpen={modalOpen} closeModal={toggleModal}
+                title={"Login Successful"}
+                description={`Welcome ${username}`}
+            />
+            {loading && <div className="login-loading"><Loader /></div>}
         </>
     )
 }

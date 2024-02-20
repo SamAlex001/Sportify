@@ -1,18 +1,22 @@
 import '../styles/navbar.css';
 import Logo from "../assets/Logo.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { useContext, useEffect, useState } from 'react';
 import { FaRegUser } from "react-icons/fa";
+import { GoTriangleUp } from "react-icons/go";
+import { IoIosLogOut } from "react-icons/io";
+import { IoIosSettings } from "react-icons/io";
 
 
 export const Navbar = () => {
 
    const navigate = useNavigate();
    const { userInfo, setUserInfo } = useContext(UserContext);
-   const username = userInfo?.username;
    const [userLoggedIn, setUserLoggedIn] = useState(false);
    const [clicked, setClicked] = useState(false);
+   const username = userInfo?.username;
+   const id = useParams();
 
    async function checkUserStatus() {
       try {
@@ -45,6 +49,21 @@ export const Navbar = () => {
       });
       setUserInfo(null);
    }
+
+   // Navigate to Profile
+   async function navigateProfile() {
+      const response = await fetch(`http://localhost:4000/user/profile`, {
+         credentials: "include"
+      });
+      if (response.ok) {
+         response.json().then((res) => {
+            console.log(res.id)
+            navigate(`/profilePage/${res.id}`)
+         })
+      }
+      // console.log("Function Called");
+   }
+
    return (
       <nav className="navbar">
          <ul id="nav-mobile" className="right">
@@ -58,7 +77,7 @@ export const Navbar = () => {
                <li>
                   <button
                      type="button"
-                     id="home-create-post"
+                     id="navbar-create-post"
                      value="submit"
                      onClick={() => { navigate("/createPost") }}
                   >Create Blog</button>
@@ -66,30 +85,35 @@ export const Navbar = () => {
             }
             <li>
                {!username ?
-                  <>
-                     <button className="home-user-login"
+                  <div className='navbar-user-login-signup-container'>
+                     <button className="navbar-user-login-btn"
                         onClick={() => { navigate("/signup") }}
                      >Sign Up</button>
-                     &nbsp;
                      or
-                     &nbsp;
-                     <button className="home-user-login"
+                     <button className="navbar-user-login-btn"
                         onClick={() => { navigate("/login") }}
                      >LogIn</button>
-                  </> :
-                  <div className="home-user-logout-container">
-                     <div className="home-username"
+                  </div> :
+                  <div className="navbar-user-settings">
+                     <div className="navbar-username"
                         onClick={() => { setClicked(!clicked) }}>
                         <FaRegUser className='navbar-user-icon' />{username}
                      </div>
                      {clicked &&
-                        <button className='home-user-logout'
-                           onClick={() => { logout() }}>LogOut</button>
+                        <div className='navbar-user-options-wrapper'>
+                           <GoTriangleUp className='navbar-options-arrow' />
+                           <button className='navbar-user-profile-btn'
+                              onClick={navigateProfile}
+                           ><IoIosSettings className='navber-user-options-icon' />Profile</button>
+                           <button className='navbar-user-logout-btn'
+                              onClick={() => { logout() }}
+                           ><IoIosLogOut className='navber-user-options-icon' />LogOut</button>
+                        </div>
                      }
                   </div>
                }
             </li>
          </ul>
-      </nav>
+      </nav >
    );
 }

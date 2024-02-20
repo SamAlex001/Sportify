@@ -5,14 +5,15 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 
-const style = {
+const CustomModalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: `var(--prim)`,
+  color: `var(--tert)`,
+  border: 'none',
   boxShadow: 24,
   p: 4,
 };
@@ -33,45 +34,141 @@ export const CustomModal = ({ isOpen, closeModal, title, description }) => {
           }
         }}
       >
-      <Fade in={isOpen}>
-        <Box sx={style}>
-          <Typography id="transition-modal-title" variant="h6" component="h2">
-            {title}
-          </Typography>
-          <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-            {description}
-          </Typography>
-        </Box>
-      </Fade>
-    </Modal>
+        <Fade in={isOpen}>
+          <Box sx={CustomModalStyle}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              {title}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </div >
   );
 }
 
-export const LoginModal = () => {
+export const LoginModal = ({ isOpen, closeModal, title, description }) => {
   return (
-    <>
-    </>
-  )
+    <div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isOpen}
+        onClose={closeModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          }
+        }}
+      >
+        <Fade in={isOpen}>
+          <Box sx={CustomModalStyle}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              {title}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+    </div >
+  );
 }
 
-export const SignUpModal = () => {
+export const SignUpModal = ({ isOpen, closeModal, title, description }) => {
   return (
-    <>
-    </>
-  )
+    <div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isOpen}
+        onClose={closeModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          }
+        }}
+      >
+        <Fade in={isOpen}>
+          <Box sx={CustomModalStyle}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              {title}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+    </div >
+  );
 }
 
-export const PostModal = () => {
+export const PostModal = ({ isOpen, closeModal, title, description }) => {
   return (
-    <>
-    </>
-  )
+    <div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isOpen}
+        onClose={closeModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          }
+        }}
+      >
+        <Fade in={isOpen}>
+          <Box sx={CustomModalStyle}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              {title}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+    </div >
+  );
 }
 
-export const Modal = () => {
+export const CommentModal = ({ isOpen, closeModal, title, description }) => {
   return (
-    <>
-    </>
-  )
+    <div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isOpen}
+        onClose={closeModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          }
+        }}
+      >
+        <Fade in={isOpen}>
+          <Box sx={CustomModalStyle}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              {title}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+    </div >
+  );
 }

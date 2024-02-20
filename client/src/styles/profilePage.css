@@ -1,0 +1,31 @@
+.prof-container {
+   position: relative;
+   display: flex;
+   justify-content: center;
+   margin-top: 4rem;
+}
+
+.prof-content-container {
+   position: absolute;
+   left: 38rem;
+   display: flex;
+   justify-content: center;
+   align-items: flex-start;
+   flex-direction: column;
+   gap: 1rem;
+   background-color: var(--prim);
+   color: white;
+   font-weight: 500;
+   padding: 1rem;
+   width: max-content;
+   border-radius: .4rem;
+}
+
+.prof-username,
+.prof-email,
+.prof-password {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 1rem;
+}

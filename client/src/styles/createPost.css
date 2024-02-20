@@ -25,6 +25,16 @@
 .cp-editorWrapper {
    margin-top: 1rem;
 }
+
+.cp-btnWrapper,
+.cp-cancelBtnWrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: .4rem;
+   margin-top: 1rem;
+}
+
 .cp-create-btn {
    border: none;
    padding: 0.4rem;
@@ -33,4 +43,24 @@
    color: white;
    background-color: #397367;
    cursor: pointer;
+}
+
+.cp-cancel-btn {
+   border: none;
+   padding: 0.4rem;
+   border-radius: .2rem;
+   font-weight: 500;
+   color-scheme: black;
+   color: black;
+   border: 2px solid #397367;
+   background-color: transparent;
+   cursor: pointer;
+   transition: all .2s ease-in-out;
+}
+
+.cp-loading {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 10%;
 }

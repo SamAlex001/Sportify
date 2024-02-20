@@ -41,3 +41,10 @@
    background-color: #397367;
    cursor: pointer;
 }
+
+.ep-loading {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 10%;
+}

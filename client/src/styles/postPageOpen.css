@@ -1,5 +1,8 @@
 .postOpen-container {
-   margin: 4rem;
+   margin-top: 1rem;
+   margin-left: 4rem;
+   margin-right: 4rem;
+   margin-bottom: 3rem;
    display: flex;
    justify-content: center;
    /* align-items: flex-start; */
@@ -8,7 +11,11 @@
 }
 
 .postOpen-home-btn,
-.postOpen-edit-btn {
+.postOpen-edit-btn,
+.postOpen-delete-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
    padding-top: .4rem;
    padding-bottom: .4rem;
    padding-left: 1rem;
@@ -26,6 +33,22 @@
 .postOpen-home-btn:hover,
 .postOpen-edit-btn:hover {
    background-color: #5DA399;
+}
+
+.postOpen-delete-btn:hover {
+   background-color: rgb(219, 30, 30);
+}
+
+.ep-delete-icon {
+   font-size: 1rem;
+}
+
+.postOpen-edit-btnWrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+   gap: 1rem;
 }
 
 .postOpen-title {
@@ -61,13 +84,13 @@
    gap: .6rem;
 }
 
-.postOpen-edit-btnWrapper {
+.postOpen-contentWrapper {
+   margin: 2rem;
+}
+
+.postOpen-loading {
    display: flex;
    justify-content: center;
    align-items: center;
-   flex-direction: row;
-}
-
-.postOpen-contentWrapper {
-   margin: 2rem;
+   margin: 10%;
 }

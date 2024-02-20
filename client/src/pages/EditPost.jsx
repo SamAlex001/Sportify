@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Editor } from "../components/Editor";
 import "../styles/editPost.css";
 import { Navbar } from "../components/Navbar";
+import { PostModal } from "../components/Modal";
+import { Loader } from "../components/Loaders";
 
 export const EditPost = () => {
 
@@ -13,6 +15,16 @@ export const EditPost = () => {
     const [content, setContent] = useState('');
     const [files, setFiles] = useState('');
     const [category, setCategory] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const toggleModal = () => {
+        setModalOpen(!modalOpen);
+    }
+
+    const toggleLoading = () => {
+        setLoading(!loading);
+    }
 
     useEffect(() => {
         fetch('http://localhost:4000/posts/viewpost/' + id)
@@ -47,49 +59,59 @@ export const EditPost = () => {
             credentials: 'include',
         });
         if (response.ok) {
-            navigate('/post/' + id);
-            alert('Post Updated Sucessfully')
+            toggleModal();
+            toggleLoading();
+            setTimeout(() => {
+                navigate('/post/' + id);
+            }, 1000)
         }
     }
 
     return (
         <div>
             <Navbar />
-            <form onSubmit={updatePost} className="edit-post-container">
-                <div className="ep-goBack-btnWrapper">
-                    <Link to={-1}><button className="ep-goBack-btn">Go Back</button></Link>
-                </div>
-                <div className="ep-contentWrapper">
-                    <div className="ep-titleWrapper">
-                        <div className="ep-title-header">Title:</div>
-                        <input type="title"
-                            placeholder={'Title'}
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)} />
+            {!loading &&
+                <form onSubmit={updatePost} className="edit-post-container">
+                    <div className="ep-goBack-btnWrapper">
+                        <Link to={-1}><button className="ep-goBack-btn">Go Back</button></Link>
                     </div>
-                    <div className="ep-summaryWrapper">
-                        <div className="ep-summary-header">Summary:</div>
-                        <input type="summary"
-                            placeholder={'Summary'}
-                            value={summary}
-                            onChange={(e) => { setSummary(e.target.value) }} />
-                    </div>
-                    {/* <input type="category"
+                    <div className="ep-contentWrapper">
+                        <div className="ep-titleWrapper">
+                            <div className="ep-title-header">Title:</div>
+                            <input type="title"
+                                placeholder={'Title'}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)} />
+                        </div>
+                        <div className="ep-summaryWrapper">
+                            <div className="ep-summary-header">Summary:</div>
+                            <input type="summary"
+                                placeholder={'Summary'}
+                                value={summary}
+                                onChange={(e) => { setSummary(e.target.value) }} />
+                        </div>
+                        {/* <input type="category"
                     placeholder={'Category'}
                     value={category}
                     onChange={(e) => { setCategory(e.target.value) }} />
                 <br /><br /> */}
-                    <div className="ep-fileWrapper">
-                        <div className="ep-file-container">Thumbnail:</div>
-                        <input type="file"
-                            onChange={(e) => { setFiles(e.target.files) }} />
+                        <div className="ep-fileWrapper">
+                            <div className="ep-file-container">Thumbnail:</div>
+                            <input type="file"
+                                onChange={(e) => { setFiles(e.target.files) }} />
+                        </div>
                     </div>
-                </div>
-                <Editor onChange={setContent} value={content} />
-                <div className="ep-btnWrapper">
-                    <button className="ep-update-btn">Update Post</button>
-                </div>
-            </form>
+                    <Editor onChange={setContent} value={content} />
+                    <div className="ep-btnWrapper">
+                        <button className="ep-update-btn">Update Post</button>
+                    </div>
+                </form>}
+            <PostModal isOpen={modalOpen} closeModal={toggleModal}
+                description={"Post Updated Successfully!"}
+            />
+            {loading &&
+                <div className="ep-loading"><Loader /></div>
+            }
         </div >
     )
 }
