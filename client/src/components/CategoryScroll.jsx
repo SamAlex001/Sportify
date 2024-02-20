@@ -1,29 +1,25 @@
-import React from "react";
 import styled, { keyframes, css } from "styled-components";
-// import './App.css'; // Import CSS file
+import "../styles/categoryScroll.css";
 
 export const CategoryScroll = () => {
-   const row1 = ["FOOTBALL", "RUGBY", "FORMULA", "TENNIS", "CRICKET", "MMA", "BOXING"];
-   const row2 = ["FOOTBALL", "RUGBY", "FORMULA", "TENNIS", "CRICKET", "MMA", "BOXING"];
+   const row1 = ["FOOTBALL", "RUGBY", "FORMULA", "TENNIS", "CRICKET", "MMA", "BOXING", "NASCAR"];
 
    return (
-      <div>
-         <div className="header-bar"></div>
+      <div className="cs-container">
          <div className="title">
-            <span className="white-text">EXPLORE VARIOUS SPORTS</span>
-            <span className="black-text"> BLOGS</span>
+            <span className="white-text">Explore The Various Categories</span>
          </div>
          <AppContainer>
             <Wrapper>
                <Marquee>
-                  <MarqueeGroup forward>
+                  <MarqueeGroup >
                      {row1.map((text) => (
                         <TextGroup key={text}>
                            <StyledText>{text}</StyledText>
                         </TextGroup>
                      ))}
                   </MarqueeGroup>
-                  <MarqueeGroup forward>
+                  <MarqueeGroup >
                      {row1.map((text) => (
                         <TextGroup key={text}>
                            <StyledText>{text}</StyledText>
@@ -33,18 +29,15 @@ export const CategoryScroll = () => {
                </Marquee>
             </Wrapper>
          </AppContainer>
-         <div className="circle left-circle"></div>
-         <div className="circle right-circle"></div>
       </div>
    );
 }
 
 
 const AppContainer = styled.div`
-  width: 90vw;
-  height: 40vh;
+  width: 95vw;
+  height: 10vh;
   color: #000000;
-
   position: relative;
   display: flex;
   align-items: center;
@@ -54,7 +47,6 @@ const AppContainer = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: fit-content;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +72,6 @@ const Marquee = styled.div`
   width: 1200px; /* Adjust width to prevent overlapping */
   overflow: hidden;
   user-select: none;
-
   mask-image: linear-gradient(
     to right,
     hsl(0 0% 0% / 0),
@@ -110,7 +101,7 @@ const common = css`
 
 const MarqueeGroup = styled.div`
   ${common}
-  animation: ${scrollX} 10s linear infinite;
+  animation: ${scrollX} 20s linear infinite;
 `;
 
 const TextGroup = styled.div`

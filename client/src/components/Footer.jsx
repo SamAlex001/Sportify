@@ -1,37 +1,47 @@
 import '../styles/footerDark.css';
 import '../styles/footerLight.css';
+import FooterLogo from "../assets/Logo.png";
+import { FaInstagram, FaXTwitter, FaMeta, FaPinterest } from "react-icons/fa6";
+
 
 export const FooterDark = () => {
    return (
-      <footer className="footer">
-         <div className="footer-content">
-            <ul>
-               <h3>Sportify</h3>
-               <p>About Us</p>
-               <p>Terms of Services</p>
-               <p>Privacy Policy</p>
-               <p>Copyright © 2024</p>
-            </ul>
-         </div>
-         <div className='footer-content' >
-            <ul>
-               <h3>More Links</h3>
-               <p>User Forum</p>
-               <p>Latest Blog</p>
-               <p>Trending Blog</p>
-               <p>Sign up as Author</p>
-            </ul>
-         </div>
-         <div className="column">
-            <div className="footer-icon">
-               <ul>
-                  <ul>
-                     <i className="fa-brands fa-x-twitter"></i>
-                     <i className="fa-brands fa-instagram"></i>
-                     <i className="fa-brands fa-pinterest"></i>
-                     <i className="fa-brands fa-facebook"></i>
-                  </ul>
-               </ul>
+      <footer className="footerDark">
+         <div className="footer-content-container">
+            <div className="footer-contentWrapper">
+               <div className="footer-container-0">
+                  <div className="site-name">Sportify</div>
+                  <div className="footer-container-1">
+                     <div className="first-links-container">
+                        <ul className="olc-itemsWrapper">
+                           <li className="olc-item">About Us</li>
+                           <li className="olc-item">Terms Of Service</li>
+                           <li className="olc-item">Privacy Policy</li>
+                           <li className="olc-item">Copyright © 2024</li>
+                        </ul>
+                     </div>
+                     <div className="second-links-container">
+                        <ul className="olc-itemsWrapper">
+                           <li className="olc-item">User Forum</li>
+                           <li className="olc-item">Latest Blogs</li>
+                           <li className="olc-item">Trending Blogs</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div className="footer-container-2">
+                  <div className="site-logo">
+                     <img src={FooterLogo} alt="Logo_Not_Loading" />
+                  </div>
+                  <div className="social-links">
+                     <ul className="social-itemsWrapper">
+                        <li className="soc-item"><FaInstagram /></li>
+                        <li className="soc-item"><FaMeta /></li>
+                        <li className="soc-item"><FaPinterest /></li>
+                        <li className="soc-item"><FaXTwitter /></li>
+                     </ul>
+                  </div>
+               </div>
             </div>
          </div>
       </footer>
@@ -40,38 +50,44 @@ export const FooterDark = () => {
 
 export const FooterLight = () => {
    return (
-      <footer className="footer1">
-         <div className="footer-content">
-            <ul>
-               <h3>Sportify</h3>
-               <p>About Us</p>
-               <p>Terms of Services</p>
-               <p>Privacy Policy</p>
-               <p>Copyright © 2024</p>
-            </ul>
-         </div>
-         <div className='footer-content' >
-            <ul>
-               <h3>More Links</h3>
-               <p>User Forum</p>
-               <p>Latest Blog</p>
-               <p>Trending Blog</p>
-               <p>Sign up as Author</p>
-            </ul>
-         </div>
-         <div className="column">
-            <div className="footer-icon">
-               <ul>
-                  <ul>
-                     <i className="fa-brands fa-x-twitter"></i>
-                     <i className="fa-brands fa-instagram"></i>
-                     <i className="fa-brands fa-pinterest"></i>
-                     <i className="fa-brands fa-facebook"></i>
-                  </ul>
-               </ul>
+      <footer className="footerLight">
+         <div className="footer-content-container">
+            <div className="footer-contentWrapper">
+               <div className="footer-container-0">
+                  <div className="site-name">Sportify</div>
+                  <div className="footer-container-1">
+                     <div className="first-links-container">
+                        <ul className="olc-itemsWrapper">
+                           <li className="olc-item">About Us</li>
+                           <li className="olc-item">Terms Of Service</li>
+                           <li className="olc-item">Privacy Policy</li>
+                           <li className="olc-item">Copyright © 2024</li>
+                        </ul>
+                     </div>
+                     <div className="second-links-container">
+                        <ul className="olc-itemsWrapper">
+                           <li className="olc-item">User Forum</li>
+                           <li className="olc-item">Latest Blogs</li>
+                           <li className="olc-item">Trending Blogs</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div className="footer-container-2">
+                  <div className="site-logo">
+                     <img src={FooterLogo} alt="Logo_Not_Loading" />
+                  </div>
+                  <div className="social-links">
+                     <ul className="social-itemsWrapper">
+                        <li className="soc-item"><FaInstagram /></li>
+                        <li className="soc-item"><FaMeta /></li>
+                        <li className="soc-item"><FaPinterest /></li>
+                        <li className="soc-item"><FaXTwitter /></li>
+                     </ul>
+                  </div>
+               </div>
             </div>
          </div>
       </footer>
-
    );
 };

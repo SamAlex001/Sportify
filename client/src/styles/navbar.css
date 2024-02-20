@@ -3,42 +3,76 @@
    height: 64px;
    display: flex;
    align-items: center;
+   margin: 0rem;
+   padding: 0rem;
+   display: flex;
+   justify-content: center;
+}
 
-  }
-  
-  .brand-logo {
-   color: black;
-   padding-left: 15px;
-   font-size: 20px;
-   font-weight: bold;
-  }
-  
-  .navbar ul {
+.navbar ul li img {
+   height: 2.6rem;
+}
 
+.navbar ul {
    display: flex;
    align-items: center;
    padding-right: 15px;
-  }
-  
-  .navbar ul li {
+}
+
+.navbar ul li {
    color: black;
-   text-decoration: none;
    padding: 5px 10px;
+   list-style-type: none;
    margin: 12px;
-  }
-  
-  .navbar ul li :hover {
-   background-color: rgba(0, 0, 0, 0.2);
-  }
-
-.navbar button{
-   color-scheme: black;
-    color:white;
-    background-color: #397367;
 }
 
-
-.navbar a{
+.navbar a {
+   text-decoration: none;
    color: black;
 }
 
+#home-create-post {
+   border: none;
+   padding: 0.4rem;
+   border-radius: .2rem;
+   color-scheme: black;
+   color: white;
+   background-color: #397367;
+   cursor: pointer;
+}
+
+#home-create-post:hover {
+   color: white;
+   background-color: #397367c8;
+}
+
+.home-user-login,
+.home-user-logout {
+   border: none;
+   padding: 0.4rem;
+   border-radius: .2rem;
+   color-scheme: black;
+   color: black;
+   cursor: pointer;
+}
+
+.home-user-logout-container {
+   position: relative;
+   cursor: pointer;
+}
+
+.home-user-logout {
+   position: absolute;
+   top: 2.5rem;
+   right: 0.1rem;
+}
+
+.home-username {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.navbar-user-icon {
+   margin-right: 0.6rem;
+}

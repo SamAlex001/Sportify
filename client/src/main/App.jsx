@@ -9,7 +9,10 @@ import { PostPageOpen } from '../pages/PostPageOpen';
 import { SignUp } from '../pages/Signup';
 import { UserContextProvider } from '../context/UserContext';
 import { ProfilePage } from '../pages/ProfilePage';
-import { LiveScore } from '../pages/LiveScore';
+import { LiveScorePage } from '../pages/LiveScorePage';
+import { SearchBar } from '../components/SearchBar';
+import { AboutUs } from '../pages/AboutUs.JSX';
+import { CustomerSupport } from '../pages/CustomerSupport';
 
 function App() {
   return (
@@ -23,7 +26,10 @@ function App() {
         <Route path='/post/:id' element={<PostPageOpen />} />
         <Route path='/editPost/:id' element={<EditPost />} />
         <Route path='/profilePage/:id' element={<ProfilePage />} />
-        <Route path='/liveScore' element={<LiveScore />} />
+        <Route path='/liveScore' element={<LiveScorePage />} />
+        <Route path='/exploreBlogs' element={<SearchBar />} />
+        <Route path='/aboutUs' element={<AboutUs />} />
+        <Route path='/customerSupport' element={<CustomerSupport />} />
       </Routes>
     </UserContextProvider>
   )

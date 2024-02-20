@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Editor } from "../components/Editor";
+import "../styles/editPost.css";
+import { Navbar } from "../components/Navbar";
 
 export const EditPost = () => {
 
@@ -52,29 +54,41 @@ export const EditPost = () => {
 
     return (
         <div>
-            <Link to={'/'}><button>Go Home</button></Link>
-            <br /><br />
-            <form onSubmit={updatePost}>
-                <input type="title"
-                    placeholder={'Title'}
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)} />
-                <br /><br />
-                <input type="summary"
-                    placeholder={'Summary'}
-                    value={summary}
-                    onChange={(e) => { setSummary(e.target.value) }} />
-                <br /><br />
-                {/* <input type="category"
+            <Navbar />
+            <form onSubmit={updatePost} className="edit-post-container">
+                <div className="ep-goBack-btnWrapper">
+                    <Link to={-1}><button className="ep-goBack-btn">Go Back</button></Link>
+                </div>
+                <div className="ep-contentWrapper">
+                    <div className="ep-titleWrapper">
+                        <div className="ep-title-header">Title:</div>
+                        <input type="title"
+                            placeholder={'Title'}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)} />
+                    </div>
+                    <div className="ep-summaryWrapper">
+                        <div className="ep-summary-header">Summary:</div>
+                        <input type="summary"
+                            placeholder={'Summary'}
+                            value={summary}
+                            onChange={(e) => { setSummary(e.target.value) }} />
+                    </div>
+                    {/* <input type="category"
                     placeholder={'Category'}
                     value={category}
                     onChange={(e) => { setCategory(e.target.value) }} />
                 <br /><br /> */}
-                <input type="file"
-                    onChange={(e) => { setFiles(e.target.files) }} />
-                <br /><br />
+                    <div className="ep-fileWrapper">
+                        <div className="ep-file-container">Thumbnail:</div>
+                        <input type="file"
+                            onChange={(e) => { setFiles(e.target.files) }} />
+                    </div>
+                </div>
                 <Editor onChange={setContent} value={content} />
-                <button>Update Post</button>
+                <div className="ep-btnWrapper">
+                    <button className="ep-update-btn">Update Post</button>
+                </div>
             </form>
         </div >
     )

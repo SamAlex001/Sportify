@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Editor } from '../components/Editor';
+import { Navbar } from '../components/Navbar';
+import '../styles/createPost.css';
 
 export const CreatePost = () => {
 
@@ -33,29 +35,43 @@ export const CreatePost = () => {
 
     return (
         <div>
-            <Link to={'/'}><button>Go Home</button></Link>
-            <br /><br />
-            <form onSubmit={createPost}>
-                <input type="title"
-                    placeholder={'Title'}
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)} />
-                <br /><br />
-                <input type="summary"
-                    placeholder={'Summary'}
-                    value={summary}
-                    onChange={(e) => { setSummary(e.target.value) }} />
-                <br /><br />
-                {/* <input type="category"
-                    placeholder={'Category'}
-                    value={category}
-                    onChange={(e) => { setCategory(e.target.value) }} />
-                <br /><br /> */}
-                <input type="file"
-                    onChange={(e) => { setFiles(e.target.files) }} />
-                <br /><br />
-                <Editor value={content} onChange={setContent} />
-                <button>Create Post</button>
+            <Navbar />
+            <form onSubmit={createPost} className="create-post-container">
+                <div className="cp-contentWrapper">
+                    <div className="cp-titleWrapper">
+                        <div className="cp-title-header">Title:</div>
+                        <input type="title"
+                            placeholder={'Title'}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)} />
+                    </div>
+                    <div className="cp-summaryWrapper">
+                        <div className="cp-summary-header">Summary:</div>
+                        <input type="summary"
+                            placeholder={'Summary'}
+                            value={summary}
+                            onChange={(e) => { setSummary(e.target.value) }} />
+                    </div>
+                    {/* 
+                        <input type="category"
+                        placeholder={'Category'}
+                        value={category}
+                        onChange={(e) => { setCategory(e.target.value) }} />
+                        <br /><br /> 
+                    */}
+                    <div className="cp-fileWrapper">
+                        <div className="cp-file-container">Thumbnail:</div>
+                        <input type="file"
+                            onChange={(e) => { setFiles(e.target.files) }} />
+                        <br /><br />
+                    </div>
+                </div>
+                <div className="cp-editorWrapper">
+                    <Editor value={content} onChange={setContent} />
+                </div>
+                <div className="cp-btnWrapper">
+                    <button className="cp-create-btn">Create Post</button>
+                </div>
             </form>
         </div>
     )

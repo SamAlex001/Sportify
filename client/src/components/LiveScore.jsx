@@ -31,8 +31,6 @@ export const LiveScore = () => {
 
    return (
       <div>
-         <h1>Live Score</h1>
-         <button onClick={() => navigate("/")}>Go Home</button>
          <div className="livescore-container">
             {liveScore &&
                liveScore.map((matchInfo, index) => {

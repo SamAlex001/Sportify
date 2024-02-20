@@ -53,7 +53,7 @@ export const PostPageOpen = () => {
 
     return (
         <div className="postOpen-container">
-            <button className="postOpen-home-btn" onClick={() => navigate('/')}>Go Home</button>
+            <button className="postOpen-home-btn" onClick={() => navigate(-1)}>Go Back</button>
             <div className="postOpen-title">{postInfo.title}</div>
             <div className="postOpen-author-container">
                 <div className="postOpen-author">
