@@ -1,42 +1,39 @@
-import * as React from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import '../styles/dialogBox.css';
 
-export const AlertDialog = ({ isOpen, closeDialog, title, description }) => {
-
-   const [openDialog, setOpenDialog] = React.useState(isOpen);
+export const DialogBox = ({ isOpen, closeDialog, handleDeleteConfirm, title, description }) => {
 
    const handleClose = () => {
-      setOpenDialog(false);
+      closeDialog();
    };
 
    return (
-      <React.Fragment>
-         <Dialog
-            open={isOpen}
-            onClose={closeDialog}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-         >
-            <DialogTitle id="alert-dialog-title">
-               {title}
-            </DialogTitle>
-            <DialogContent>
-               <DialogContentText id="alert-dialog-description">
-                  {description}
-               </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-               <Button onClick={handleClose}>Disagree</Button>
-               <Button onClick={handleClose} autoFocus>
-                  Agree
-               </Button>
-            </DialogActions>
-         </Dialog>
-      </React.Fragment>
+      <Dialog
+         open={isOpen}
+         onClose={handleClose}
+         aria-labelledby="alert-dialog-title"
+         aria-describedby="alert-dialog-description"
+      >
+         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+         <DialogContent >
+            <DialogContentText id="alert-dialog-description">
+               {description}
+            </DialogContentText>
+         </DialogContent>
+         <DialogActions>
+            <Button onClick={handleClose} className='dialog-button-text'>
+               Cancel
+            </Button>
+            <Button onClick={handleDeleteConfirm} className='dialog-button-text'>
+               Delete
+            </Button>
+         </DialogActions>
+      </Dialog>
    );
 }

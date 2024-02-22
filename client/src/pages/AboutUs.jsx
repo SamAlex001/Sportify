@@ -3,55 +3,35 @@ import { Navbar } from "../components/Navbar";
 import "../styles/aboutUs.css";
 
 export const AboutUs = () => {
-   return (
-      <>
-         <Navbar />
-         <div className="div">
-            <div className="div-2">
-               Unveiling Our Passion for{" "}
-               <span>Sports and Scores</span>
+  return (
+    <>
+      <Navbar />
+      <div className="about-us-container">
+        <div className="about-us-content">
+          <h2 className="section-title">About Sportify</h2>
+          <p className="section-text">
+            At Sportify, we are dedicated to keeping you fully informed in the dynamic realm of sports. With our unwavering commitment to providing real-time updates, you can trust that you'll be in the loop with the latest scores and developments as they unfold. Our comprehensive coverage spans across all spectrums of sports, from the most prominent leagues to the most niche competitions. Whether your passion lies in football, basketball, cricket, or tennis, we ensure that you're always in the know, catering to every sports enthusiast's interests. Moreover, our platform boasts a user-friendly interface, meticulously designed to offer a seamless browsing experience across all devices. Accessing sports scores has never been easier or more intuitive, allowing you to stay connected to the information you need, no matter where you are or what device you're using.
+          </p>
+        </div>
+        <div className="team-members">
+          <h2 className="section-title">Our Team</h2>
+          <div className="team-cards">
+            <div className="team-card">
+              <h3>Manav Kumar</h3>
+              <p>Frontend Developer</p>
             </div>
-            <div className="box" />
-            <div className="div-3">
-               <div className="div-4">
-                  Our&nbsp;&nbsp;<span>Mission</span>
-               </div>
-               <div className="box-2" />
-               <div className="div-5">
-                  <div className="div-6">Real Time Updates</div>
-                  <div className="div-7">
-                     We understand the importance of staying informed in the fast-paced
-                     world of sports. That's why we prioritize real-time updates,
-                     ensuring that you have access to the latest scores and
-                     developments as they happen.
-                  </div>{" "}
-                  <div className="div-8">Comprehensive Coverage</div>{" "}
-                  <div className="div-9">
-                     Whether it's the biggest leagues or niche sports, we cover it all.
-                     From football and basketball to cricket and tennis, our
-                     comprehensive coverage ensures that you're always in the know, no
-                     matter what sport you follow
-                  </div>{" "}
-                  <div className="div-10">User-Friendly Interface</div>{" "}
-                  <div className="div-11">
-                     We believe that accessing sports scores should be easy and
-                     intuitive. Our user-friendly interface is designed to provide a
-                     seamless browsing experience across all devices, so you can access
-                     the information you need, whenever and wherever you are.
-                  </div>
-               </div>
-            </div>{" "}
-            <div className="div-12">Our Success Team</div>{" "}
-            <div className="div-13">
-               <div className="div-14">Manav Kumar</div>{" "}
-               <div className="div-15">Sam Alex</div>{" "}
-               <div className="div-16">
-                  Arvin Raju
-                  <br />
-               </div>
+            <div className="team-card">
+              <h3>Sam Alex</h3>
+              <p>Full Stack Developer & Team Leader</p>
             </div>
-         </div>{" "}
-         <FooterLight />
-      </>
-   )
-}
+            <div className="team-card">
+              <h3>Arvin Raju</h3>
+              <p>Frontend Developer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <FooterLight />
+    </>
+  );
+};

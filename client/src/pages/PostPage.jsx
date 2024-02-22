@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Post } from "../components/Post";
 
-export const PostPage = ({ search }) => {
+export const PostPage = ({ search, limit }) => {
 
     // SHOW posts
     const [posts, setPosts] = useState([]);
@@ -23,8 +23,8 @@ export const PostPage = ({ search }) => {
     return (
         <div>
             {searchPost && searchPost.length > 0
-                ? (searchPost.map(searchedPost => <Post key={searchedPost._id} {...searchedPost} />))
-                : (posts.map(post => <Post key={post._id} {...post} />))
+                ? (searchPost.slice(0, limit).map(searchedPost => <Post key={searchedPost._id} {...searchedPost} />))
+                : (posts.slice(0, limit).map(post => <Post key={post._id} {...post} />))
             }
         </div>
     )

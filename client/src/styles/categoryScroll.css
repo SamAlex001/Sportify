@@ -7,11 +7,12 @@
 .white-text {
    color: var(--prim);
    margin-top: .4rem;
-   font-size: 1.4rem;
+   font-size: 2rem;
    font-weight: 600;
 }
 
 .cs-container {
    margin: 0rem;
    padding: 0rem;
+   margin-top: 2.4rem;
 }

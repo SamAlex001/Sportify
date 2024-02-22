@@ -2,7 +2,7 @@ import '../styles/post.css';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 
-export const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
+export const Post = ({ _id, title, summary, cover, content, createdAt, author, limit }) => {
 
     const URL = "http://localhost:5173/"
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const Post = ({ _id, title, summary, cover, content, createdAt, author })
             <div className="post-details">
                 <div className="post-title" onClick={() => navigate(`/post/${_id}`)}>{title}</div>
                 <div className="post-author">Author: @{author.username}</div>
-                <div className="post-time">Published At: {format(new Date(createdAt), 'MM dd, yyyy')}</div>
+                <div className="post-time">Published At: {format(new Date(createdAt), 'dd-MM-yy')}</div>
                 <br />
                 <div className="post-summary">{summary}</div>
                 <br />

@@ -26,14 +26,23 @@
 }
 
 .post-title {
-    font-size: 2.4rem;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: black;
     cursor: pointer;
 }
 
 .post-author {
     color: #00000097;
-    font-size: 1rem;
+    font-size: .91rem;
+}
+
+.post-summary {
+    font-size: .8rem;
+}
+
+.post-time {
+    font-size: .7rem;
 }
 
 .post-read-btn {

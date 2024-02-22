@@ -11,7 +11,7 @@ import { UserContextProvider } from '../context/UserContext';
 import { ProfilePage } from '../pages/ProfilePage';
 import { LiveScorePage } from '../pages/LiveScorePage';
 import { SearchBar } from '../components/SearchBar';
-import { AboutUs } from '../pages/AboutUs.JSX';
+import { AboutUs } from '../pages/AboutUs';
 import { CustomerSupport } from '../pages/CustomerSupport';
 
 function App() {

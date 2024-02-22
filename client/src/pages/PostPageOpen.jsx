@@ -1,15 +1,16 @@
+import '../styles/postPageOpen.css';
 import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { PostComments } from "../components/PostComments";
-import { Comment } from "../components/Comments";
-import '../styles/postPageOpen.css';
+import { PostComments } from "../components/Comment";
+import { Comment } from "../components/PostComments";
 import { Navbar } from "../components/Navbar";
 import { MdDelete } from "react-icons/md";
-import { AlertDialog } from "../components/DialogBox";
 import { PostModal } from "../components/Modal";
 import { Loader } from "../components/Loaders";
+import { FooterDark } from "../components/Footer";
+import { DialogBox } from "../components/DialogBox";
 
 export const PostPageOpen = () => {
 
@@ -22,6 +23,8 @@ export const PostPageOpen = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const adjustedCover = postCover.substring(10);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [idToDelete, setIdToDelete] = useState(null);
     const URL = "http://localhost:5173/"
     const { id } = useParams();
 
@@ -34,6 +37,28 @@ export const PostPageOpen = () => {
     }
 
     const toggleLoading = () => setLoading(!loading)
+
+    const handleDeleteCancel = () => {
+        setOpenDialog(false);
+    };
+
+    const handleDeleteConfirm = async () => {
+        setOpenDialog(false);
+        toggleConfirmDelete();
+            console.log("Ok Clicked");
+            const response = await fetch(`http://localhost:4000/posts/deletepost/${id}`, {
+                credentials: "include",
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                toggleDeleteModal();
+                toggleLoading();
+                setTimeout(() => {
+                    navigate("/exploreBlogs");
+                }, 1000)
+            }
+       
+    };
 
     useEffect(() => {
 
@@ -62,34 +87,19 @@ export const PostPageOpen = () => {
                 .then(commentInfo => {
                     setCommentInfo(commentInfo);
                     // console.log(commentInfo)
+                    // console.log(commentInfo[0]._id)
                 }));
     }, []);
     // console.log(adjustedCover)
     // console.log(postCover);
 
-    async function deletePost(e) {
-        e.preventDefault();
-        toggleConfirmDelete();
-        if (confirm("Delete Post?").valueOf()) {
-            console.log("Ok Clicked");
-            const response = await fetch(`http://localhost:4000/posts/deletepost/${id}`, {
-                credentials: "include",
-                method: 'DELETE'
-            });
-            if (response.ok) {
-                toggleDeleteModal();
-                toggleLoading();
-                setTimeout(() => {
-                    navigate("/exploreBlogs");
-                }, 1000)
-            }
-        } else {
-            console.log("Cancel Clicked")
-        }
-
+    async function deletePost(id) {
+        setOpenDialog(true);
+        setIdToDelete(id);
     }
 
     if (!postInfo) return ''; // return empty string for no post
+
 
     return (
         <>
@@ -131,12 +141,18 @@ export const PostPageOpen = () => {
                         <PostComments />
                     </div>
                     <div className="postOpen-commentStack">
-                        {commentInfo?.map((commentInfo) =>
-                            <Comment key={commentInfo.id} commentInfoInput={commentInfo} postInfoInput={postInfo} />
+                        {commentInfo?.map((commentInfo, index) =>
+                            <Comment key={commentInfo._id} commentInfoInput={commentInfo} postInfoInput={postInfo} />
                         )}
                     </div>
                 </div>}
-            {/* <AlertDialog /> */}
+            <DialogBox
+                isOpen={openDialog}
+                closeDialog={handleDeleteCancel}
+                handleDeleteConfirm={handleDeleteConfirm}
+                description={"Are you sure you want to delete this post?"}
+                title={"Delete the Post"}
+            />
             <PostModal isOpen={deleteModalOpen} closeModal={toggleDeleteModal}
                 description={"Post Deleted Successfully!"}
             />

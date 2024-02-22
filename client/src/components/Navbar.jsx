@@ -8,16 +8,16 @@ import { GoTriangleUp } from "react-icons/go";
 import { IoIosLogOut } from "react-icons/io";
 import { IoIosSettings } from "react-icons/io";
 
-
 export const Navbar = () => {
 
+   const id = useParams();
    const navigate = useNavigate();
    const { userInfo, setUserInfo } = useContext(UserContext);
    const [userLoggedIn, setUserLoggedIn] = useState(false);
-   const [clicked, setClicked] = useState(false);
    const username = userInfo?.username;
-   const id = useParams();
+   const [clicked, setClicked] = useState(false);
 
+   // Function USER STATUS: Logged In or Not
    async function checkUserStatus() {
       try {
          const response = await fetch('http://localhost:4000/user/profile', {
@@ -57,11 +57,10 @@ export const Navbar = () => {
       });
       if (response.ok) {
          response.json().then((res) => {
-            console.log(res.id)
+            // console.log(res.id)
             navigate(`/profilePage/${res.id}`)
          })
       }
-      // console.log("Function Called");
    }
 
    return (
