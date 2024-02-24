@@ -6,6 +6,8 @@ import { UserContext } from "../context/UserContext";
 import { Navbar } from "../components/Navbar";
 import { LoginModal } from "../components/Modal";
 import { Loader } from '../components/Loaders';
+import { IoIosAlert } from "react-icons/io";
+
 
 export const Login = () => {
 
@@ -16,6 +18,7 @@ export const Login = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const { setUserInfo } = useContext(UserContext);
+    const [loginError, setLoginError] = useState(false);
 
     const toggleModal = () => {
         setModalOpen(!modalOpen);
@@ -43,7 +46,8 @@ export const Login = () => {
                 }, 1000);
             })
         } else {
-            console.log('Login Failed');
+            setLoginError(!loginError);
+            // console.log('Login Failed');
         }
     }
 
@@ -65,6 +69,7 @@ export const Login = () => {
                             <div className="input-text prim--color">Password</div>
                             <input type="password" className='custom-login-input' id='password' size={30} required onChange={(e) => { setPassword(e.target.value) }} />
                         </div>
+                        {loginError && <div className="login-error-msg"><IoIosAlert />&nbsp; Incorrect Username or Password</div>}
                         <br />
                         <input type="submit" value="Login" className='login-form-btn' />
                     </form>
@@ -74,8 +79,8 @@ export const Login = () => {
                 </div>
             </div>}
             <LoginModal isOpen={modalOpen} closeModal={toggleModal}
-                title={"Login Successful"}
-                description={`Welcome ${username}`}
+                title={`Welcome ${username}`}
+                description={'Login Successful!'}
             />
             {loading && <div className="login-loading"><Loader /></div>}
         </>

@@ -2,6 +2,7 @@ import '../styles/comments.css';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
+import { CommentModal } from './Modal';
 
 export const PostComments = () => {
 
@@ -12,6 +13,7 @@ export const PostComments = () => {
    const [postAuthor, setPostAuthor] = useState('');
    const [username, setUsername] = useState('');
    const [userId, setUserId] = useState('');
+   const [modalOpen, setModalOpen] = useState(false);
 
    useEffect(() => {
       setUsername(userInfo.username);
@@ -25,6 +27,11 @@ export const PostComments = () => {
             }))
    }, []);
    // console.log(postId)
+   // console.log(!(userInfo.username))
+
+   const toggleModal = () => {
+      setModalOpen(!modalOpen);
+   }
 
    async function postComment(e) {
       e.preventDefault();
@@ -32,25 +39,38 @@ export const PostComments = () => {
       data.set('comment', comment);
       data.set('postId', postId);
 
-      if (comment === '') { alert('Write a comment before posting') }
-      else {
-         const response = await fetch('http://localhost:4000/comments/postcomment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-               comment: comment,
-               author: username,
-               postId: postId,
-               userId: userId,
-               postAuthor: postAuthor
-            }),
-            credentials: 'include',
-         });
-         if (response.ok) {
-            setComment('')
-            alert('Comment Posted')
+      if ((userInfo.username)) {
+         if (comment === '') { alert('Write a comment before posting') }
+         else {
+            const response = await fetch('http://localhost:4000/comments/postcomment', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({
+                  comment: comment,
+                  author: username,
+                  postId: postId,
+                  userId: userId,
+                  postAuthor: postAuthor
+               }),
+               credentials: 'include',
+            });
+            if (response.ok) {
+               setComment('')
+               alert('Comment Posted')
+            }
+            window.location.reload();
          }
-         window.location.reload();
+      } else {
+         toggleModal();
+      }
+   }
+
+   async function userCheck(e) {
+      e.preventDefault();
+
+      const response = await fetch(`http://localhost:4000/users/profile`);
+      if (response.ok){
+
       }
    }
 
@@ -60,14 +80,21 @@ export const PostComments = () => {
             <div className="comm-content">
                <textarea type="text"
                   value={comment}
-                  onChange={(e) => { setComment(e.target.value) }}
+                  onChange={(e) => { username && setComment(e.target.value) }}
                   placeholder='Comment here'
                />
             </div>
             <div className="comm-postBtn-container">
-               <button className="comm-post-btn">Post</button>
+               <button className="comm-post-btn"
+               >Post</button>
             </div>
          </form>
+         <CommentModal
+            isOpen={modalOpen}
+            closeModal={toggleModal}
+            title={"You are not Logged In!"}
+            description={"LogIn to comment."}
+         />
       </div>
    )
 }

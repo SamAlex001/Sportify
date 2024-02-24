@@ -41,11 +41,12 @@ export const SearchBar = () => {
          <Navbar />
          <form className="searchBar-container">
             <input type="text"
+               className="searchBar-input"
                value={searchFilter}
                onChange={(e) => setSearchFilter(e.target.value)}
             />
             {searchFilter !== "" &&
-               <button className="search-btn" onClick={(e) => clearFliter(e)}>
+               <button className="searchBar-clear-btn" onClick={(e) => clearFliter(e)}>
                   <MdOutlineClear />
                </button>
             }

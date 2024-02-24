@@ -3,19 +3,37 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   gap: .4rem;
 }
 
-.searchBar-container > input {
-   height: 3.6vh;
-   width: 50vh;
+.searchBar-input {
+   height: 1.6rem;
+   width: 25rem;
 }
 
 .search-btn {
    border: none;
-   padding: 0.4rem;
+   padding: 0.36rem;
    border-radius: .2rem;
    color-scheme: black;
    color: white;
    background-color: #397367;
    cursor: pointer;
+   text-align: center;
+   font-size: .91rem;
+}
+
+.searchBar-clear-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: none;
+   padding: .36rem;
+   border-radius: .2rem;
+   color-scheme: black;
+   color: white;
+   background-color: var(--B01);
+   cursor: pointer;
+   text-align: center;
+   font-size: 1.1rem;
 }

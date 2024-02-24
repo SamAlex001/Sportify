@@ -6,7 +6,7 @@
 
 const express = require("express");
 const route = express.Router();
-const API_KEY = "7c8b88f7-73f1-4e06-a14c-51f6aedf90d9";
+const API_KEY = "cbb20b7a-baee-46fc-99d1-5e92d5f7944d";
 const CRIC_URL = `https://api.cricapi.com/v1/currentMatches?apikey=${API_KEY}&offset=0`
 
 route.get("/cricket", async (req, res) => {

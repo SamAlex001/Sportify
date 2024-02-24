@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ScoreCard } from "../components/ScoreCard";
 import "../styles/liveScore.css";
 
@@ -31,7 +30,7 @@ export const LiveScore = ({ limit }) => { // Add 'limit' prop
    return (
       <div>
          <div className="livescore-container">
-            {liveScore.slice(0, limit).map((matchInfo, index) => { // Use 'limit' to slice the liveScore array
+            {liveScore.slice(0, limit).map((matchInfo, index) => {
                const dateTime = matchInfo.dateTimeGMT;
                const matchType = matchInfo.matchType;
                const matchStatus = matchInfo.status;

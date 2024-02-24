@@ -19,6 +19,22 @@
    padding-right: 15px;
 }
 
+.nav-links {
+   list-style: none;
+   display: inline-block;
+   margin-right: 20px;
+}
+
+.nav-links a {
+   text-decoration: none;
+   transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+   color: var(--prim);
+}
+
+
 .navbar ul li {
    color: black;
    padding: 5px 10px;
@@ -85,6 +101,7 @@
 .navbar-user-logout-btn {
    position: absolute;
    top: 3.5rem;
+   z-index: 20;
    right: 0.4rem;
 }
 
@@ -99,13 +116,23 @@
 }
 
 .navber-user-options-icon {
+   color: var(--tert);
    font-size: 1rem;
+   z-index: 20;
 }
 
 .navbar-user-profile-btn {
+   width: 80%;
+   height: 16px;
    position: absolute;
    top: 1rem;
+   z-index: 20;
    right: 0.4rem;
+}
+
+.navbar-user-profile-btn>span {
+   color: var(--tert);
+   font-size: .9rem;
 }
 
 .navbar-options-arrow {
@@ -113,6 +140,7 @@
    top: -0.9rem;
    right: 3.3rem;
    font-size: 1.4rem;
+   z-index: 20;
    color: #397367;
 }
 
@@ -126,4 +154,18 @@
    padding-bottom: 4.2rem;
    border-radius: .4rem;
    background-color: var(--prim);
+   z-index: 20;
+}
+
+.navbar-loader-container {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(255, 255, 255, 0.5);
+   z-index: 100;
 }

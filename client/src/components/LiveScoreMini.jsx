@@ -18,11 +18,11 @@ export const LiveScoreMini = () => {
          const score = await response.json();
          const data = score.data;
          setLiveScore(data);
-         setLoading(false);
+         setLoading(!loading); //
       }
       catch (error) {
          console.log("Error Loading Match Data: ", error);
-         setLoading(false);
+         setLoading(!loading);
       }
    }
 

@@ -1,6 +1,6 @@
+import "../styles/liveScore.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import "../styles/liveScore.css";
 import { Navbar } from "../components/Navbar";
 import { LiveScore } from "../components/LiveScore";
 import { Loader } from "../components/Loaders";
@@ -22,7 +22,7 @@ export const LiveScorePage = () => {
          const score = await response.json();
          const data = score.data;
          setLiveScore(data);
-         setLoading(!loading);
+         setLoading(!loading); //
       }
       catch (error) {
          console.log("Error Loading Match Data: ", error);

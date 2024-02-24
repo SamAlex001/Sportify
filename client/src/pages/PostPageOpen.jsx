@@ -45,20 +45,25 @@ export const PostPageOpen = () => {
     const handleDeleteConfirm = async () => {
         setOpenDialog(false);
         toggleConfirmDelete();
-            console.log("Ok Clicked");
-            const response = await fetch(`http://localhost:4000/posts/deletepost/${id}`, {
-                credentials: "include",
-                method: 'DELETE'
-            });
-            if (response.ok) {
-                toggleDeleteModal();
-                toggleLoading();
-                setTimeout(() => {
-                    navigate("/exploreBlogs");
-                }, 1000)
-            }
-       
+        console.log("Ok Clicked");
+        const response = await fetch(`http://localhost:4000/posts/deletepost/${id}`, {
+            credentials: "include",
+            method: 'DELETE'
+        });
+        if (response.ok) {
+            toggleDeleteModal();
+            toggleLoading();
+            setTimeout(() => {
+                navigate("/exploreBlogs");
+            }, 1000)
+        }
+
     };
+
+    async function deletePost(id) {
+        setOpenDialog(true);
+        setIdToDelete(id);
+    }
 
     useEffect(() => {
 
@@ -92,11 +97,6 @@ export const PostPageOpen = () => {
     }, []);
     // console.log(adjustedCover)
     // console.log(postCover);
-
-    async function deletePost(id) {
-        setOpenDialog(true);
-        setIdToDelete(id);
-    }
 
     if (!postInfo) return ''; // return empty string for no post
 

@@ -7,6 +7,7 @@ import { FaRegUser } from "react-icons/fa";
 import { GoTriangleUp } from "react-icons/go";
 import { IoIosLogOut } from "react-icons/io";
 import { IoIosSettings } from "react-icons/io";
+import { Loader } from './Loaders';
 
 export const Navbar = () => {
 
@@ -16,6 +17,8 @@ export const Navbar = () => {
    const [userLoggedIn, setUserLoggedIn] = useState(false);
    const username = userInfo?.username;
    const [clicked, setClicked] = useState(false);
+   const [loading, setLoading] = useState(false);
+
 
    // Function USER STATUS: Logged In or Not
    async function checkUserStatus() {
@@ -36,11 +39,6 @@ export const Navbar = () => {
       }
    }
 
-   // USER STATUS: Logged In or Not
-   useEffect(() => {
-      checkUserStatus();
-   }, []);
-
    // LOGOUT Function
    function logout() {
       fetch('http://localhost:4000/auth/logout', {
@@ -48,32 +46,25 @@ export const Navbar = () => {
          method: 'POST',
       });
       setUserInfo(null);
+      window.location.reload();
    }
 
-   // Navigate to Profile
-   async function navigateProfile() {
-      const response = await fetch(`http://localhost:4000/user/profile`, {
-         credentials: "include"
-      });
-      if (response.ok) {
-         response.json().then((res) => {
-            // console.log(res.id)
-            navigate(`/profilePage/${res.id}`)
-         })
-      }
-   }
+   // USER STATUS: Logged In or Not
+   useEffect(() => {
+      checkUserStatus();
+   }, []);
 
    return (
       <nav className="navbar">
          <ul id="nav-mobile" className="right">
-            <li><Link to={'/'}><img src={Logo} alt="Image_Not_Loading" /></Link></li>
-            <li><Link to={'/'}> Home</Link> </li>
-            <li><Link to={'/aboutUs'}>About Us</Link></li>
-            <li><Link to={'/customerSupport'}>Customer Support</Link></li>
-            <li><Link to={'/exploreBlogs'}>Explore Blogs</Link></li>
-            <li><Link to={'/liveScore'}>Live Score</Link></li>
+            <li className='nav-links'><Link to={'/'}><img src={Logo} alt="Image_Not_Loading" /></Link></li>
+            <li className='nav-links'><Link to={'/'}> Home</Link> </li>
+            <li className='nav-links'><Link to={'/exploreBlogs'}>Explore Blogs</Link></li>
+            <li className='nav-links'><Link to={'/liveScore'}>Live Score</Link></li>
+            <li className='nav-links'><Link to={'/customerSupport'}>Support</Link></li>
+            <li className='nav-links'><Link to={'/aboutUs'}>About Us</Link></li>
             {username &&
-               <li>
+               <li className='nav-links'>
                   <button
                      type="button"
                      id="navbar-create-post"
@@ -88,7 +79,9 @@ export const Navbar = () => {
                      <button className="navbar-user-login-btn"
                         onClick={() => { navigate("/signup") }}
                      >Sign Up</button>
+                     &nbsp;
                      or
+                     &nbsp;
                      <button className="navbar-user-login-btn"
                         onClick={() => { navigate("/login") }}
                      >LogIn</button>
@@ -101,9 +94,10 @@ export const Navbar = () => {
                      {clicked &&
                         <div className='navbar-user-options-wrapper'>
                            <GoTriangleUp className='navbar-options-arrow' />
-                           <button className='navbar-user-profile-btn'
-                              onClick={navigateProfile}
-                           ><IoIosSettings className='navber-user-options-icon' />Profile</button>
+                           <Link className='navbar-user-profile-btn'
+                              // onClick={() => { navigateProfile() }}
+                              to={`/profilePage/${userInfo?.id}`}
+                           ><IoIosSettings className='navber-user-options-icon' /><span>Profile</span></Link>
                            <button className='navbar-user-logout-btn'
                               onClick={() => { logout() }}
                            ><IoIosLogOut className='navber-user-options-icon' />LogOut</button>
@@ -113,6 +107,9 @@ export const Navbar = () => {
                }
             </li>
          </ul>
+         {loading &&
+            <div className="navbar-loader-container"><Loader /></div>
+         }
       </nav >
    );
 }

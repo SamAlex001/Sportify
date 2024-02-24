@@ -1,31 +1,51 @@
 .prof-container {
-   position: relative;
    display: flex;
    justify-content: center;
    margin-top: 4rem;
 }
 
 .prof-content-container {
-   position: absolute;
-   left: 38rem;
    display: flex;
-   justify-content: center;
-   align-items: flex-start;
    flex-direction: column;
-   gap: 1rem;
-   background-color: var(--prim);
-   color: white;
+   gap: 1.5rem;
+   background-color: #f4f4f4;
+   color: #333;
    font-weight: 500;
-   padding: 1rem;
-   width: max-content;
-   border-radius: .4rem;
+   padding: 2rem;
+   border-radius: 0.5rem;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+   max-width: 500px;
+   width: 100%;
 }
 
-.prof-username,
-.prof-email,
-.prof-password {
-   display: flex;
-   justify-content: flex-start;
-   align-items: center;
-   gap: 1rem;
+.prof-content-container > * {
+   margin-bottom: 1rem;
+}
+
+.prof-content-container input[type="text"],
+.prof-content-container input[type="email"],
+.prof-content-container input[type="password"] {
+   padding: 0.8rem;
+   border: 1px solid #ccc;
+   border-radius: 0.3rem;
+   width: 95%;
+}
+
+.prof-content-container button {
+   padding: 0.8rem;
+   border: none;
+   border-radius: 0.3rem;
+   background-color: var(--prim);
+   color: white;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.prof-content-container button:hover {
+   background-color: var(--seco);
+}
+
+.prof-content-container button:focus {
+   outline: none;
+   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }

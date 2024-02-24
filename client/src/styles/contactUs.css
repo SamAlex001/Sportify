@@ -75,6 +75,7 @@
 }
 
 .contact-send-btn-container {
+   border: none;
    width: 89px;
    height: 20px;
    left: 0;
@@ -141,7 +142,7 @@
 
 .faq-contact-background {
    width: 100%;
-   height: 465px;
+   height: 405px;
    position: relative;
    left: 100px;
 }
@@ -159,7 +160,7 @@
 .faq-contact-text {
    width: 225px;
    left: 357px;
-   top: 204px;
+   top: 185px;
    position: absolute;
    text-align: center;
    color: black;
@@ -206,6 +207,7 @@
 }
 
 .faq-contact-send-btn-container {
+   border: none;
    width: 89px;
    height: 20px;
    left: 0;

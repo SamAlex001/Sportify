@@ -9,7 +9,6 @@ import Nascar from '../assets/nascar.jpg';
 import MMA from '../assets/mma.jpg';
 import Boxing from '../assets/boxing.jpg';
 
-
 const carouselItems = [
   <div className="carousel-item">
     <div className="carousel-bg" style={{ backgroundImage: `url(${NBA})` }}></div>
@@ -45,24 +44,36 @@ const carouselItems = [
   </div>
 ];
 
-export const Carousel = ({ items = carouselItems, interval = 3000 }) => {
+export const Carousel = ({ items = carouselItems, interval = 4000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 for left-to-right, -1 for right-to-left
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === items.length - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentIndex(prevIndex => {
+        if (prevIndex === items.length - 1 && direction === 1) {
+          setDirection(-1);
+          return prevIndex;
+        } else if (prevIndex === 0 && direction === -1) {
+          setDirection(1);
+          return prevIndex;
+        } else {
+          return (prevIndex + direction) % items.length;
+        }
+      });
     }, interval);
 
     return () => clearInterval(intervalId);
-  }, [items.length, interval]);
+  }, [items.length, interval, direction, items]);
 
   return (
     <div className="carousel">
       <div
         className="carousel-inner"
-        style={{ transform: `translateX(-${currentIndex * 100}%)`, transition: `1s ease-in-out all` }}
+        style={{
+          transform: `translateX(-${currentIndex * 100}%)`,
+          transition: `transform 1s ease-in-out`
+        }}
       >
         {items.map((item, index) => (
           <div className="carousel-item" key={index}>
