@@ -63,6 +63,7 @@ router.get('/viewprofile/:id', async (req, res) => {
 });
 
 // UPDATE Profile
+/*
 router.put('/updateprofile/:id', async (req, res) => {
     const { id } = req.params;
     const { username, email, password } = req.body;
@@ -82,6 +83,49 @@ router.put('/updateprofile/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+*/
+
+router.put('/updateprofile/:id', async (req, res) => {
+    const { id } = req.params;
+    const { username, email, password } = req.body;
+    try {
+        // Hash the new password if provided
+        let hashedPassword;
+        if (password) {
+            hashedPassword = await bcrypt.hash(password, 10);
+        }
+        
+        // Prepare the update object
+        const updateData = { username, email };
+        if (hashedPassword) {
+            updateData.password = hashedPassword; // Add hashed password to update data if provided
+        }
+
+        // Update the user's profile
+        await User.updateOne({ _id: id }, updateData);
+
+        // Retrieve the updated user
+        const updatedUser = await User.findById(id);
+
+        // Generate a new token with updated user information
+        const newToken = jwt.sign({
+            id: updatedUser._id,
+            username: updatedUser.username,
+            // Do not include the password in the JWT payload
+        }, secret);
+
+        // Set the new token in the response cookie
+        res.cookie('token', newToken);
+
+        // Send success response
+        res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
+    } catch (error) {
+        console.log('Error Updating Profile: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 
 module.exports = router;

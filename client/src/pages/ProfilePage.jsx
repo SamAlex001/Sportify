@@ -1,8 +1,10 @@
 import '../styles/profilePage.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/UserContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
+import { toast } from 'react-toastify';
+import { Loader } from '../components/Loaders';
 
 export const ProfilePage = () => {
 
@@ -13,8 +15,8 @@ export const ProfilePage = () => {
    const [password, setPassword] = useState('');
    const [confirmPass, setConfirmPass] = useState('');
    const [userLoggedIn, setUserLoggedIn] = useState(false);
-   const [clicked, setClicked] = useState(false);
-   const navigate = useNavigate();
+   const [loading, setLoading] = useState(false);
+
 
    async function checkUserStatus() {
       try {
@@ -25,8 +27,9 @@ export const ProfilePage = () => {
             const userInfo = await response.json();
             setUserLoggedIn(true);
             setUserInfo(userInfo);
+            // window.location.reload();
          } else if (response.status === 401) {
-            setUserLoggedIn(false);
+            // setUserLoggedIn(userLoggedIn);
             console.log("401 ERROR: Unauthorized User!");
          }
       } catch (error) {
@@ -35,55 +38,79 @@ export const ProfilePage = () => {
    }
 
    async function viewProfile() {
-      const response = await fetch(`http://localhost:4000/user/viewprofile/${id}`, {
-         credentials: 'include'
-      });
-      if (response.ok) {
-         response.json().then(userInfo => {
-            // console.log(userInfo);
-            setUserInfo(userInfo.userDoc);
-            setUsername(userInfo.userDoc.username);
-            setUserEmail(userInfo.userDoc.email);
-         });
+      if (userLoggedIn) {
+         try {
+            const response = await fetch(`http://localhost:4000/user/viewprofile/${id}`, {
+               credentials: 'include'
+            });
+            console.log("API response: ", response);
+            if (response.ok) {
+               const userInfo = await response.json();
+               console.log("User Info from API:", userInfo);
+               setUserInfo(userInfo.userDoc);
+               setUsername(userInfo.userDoc.username);
+               setUserEmail(userInfo.userDoc.email);
+            } else {
+               console.error("No Response");
+            }
+         } catch (error) {
+            console.log("Error loading User Data: ", error);
+         }
       } else {
-         console.error("No Response");
+         console.log("User Not Logged In")
+      }
+   }
+   
+   async function updateUserDetails(e) {
+      e.preventDefault();
+   
+      const newUserName = username;
+      const newEmail = userEmail;
+      const newPassword = password !== '' && confirmPass !== '' ? confirmPass : userInfo.password;
+      
+      // Check if passwords match
+      if (password !== confirmPass) {
+         toast.error('Passwords do not match');
+         return;
+      }
+   
+      try {
+         const response = await fetch('http://localhost:4000/user/updateprofile/' + id, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+               username: newUserName,
+               email: newEmail,
+               password: newPassword,
+            })
+         });
+   
+         if (response.ok) {
+            setLoading(!loading);
+            setTimeout(() => {
+               window.location.reload();
+            }, 1000);
+            toast.success('Profile Updated!');
+         } else {
+            toast.error('Profile Update Failed');
+         }
+      } catch (error) {
+         console.error('Error updating profile:', error);
+         toast.error('An error occurred while updating profile');
       }
    }
    
 
    useEffect(() => {
-      viewProfile();
+      if (userLoggedIn) {
+         viewProfile();
+      }
+   }, [userLoggedIn]);
+   
+   useEffect(() => {
       checkUserStatus();
-   }, []);
-
-   // console.log(userInfo)
-   // console.log(username);
-   // console.log(userEmail);
-   // console.log(password);
-   // console.log(password)
-   // console.log(confirmPass)
-
-   async function updateUserDetails(e) {
-      e.preventDefault();
-
-      const newUserName = username;
-      const newEmail = userEmail;
-      const newPassword = password !== '' && confirmPass !== '' ? confirmPass : userInfo.password;
-      if (!(password === confirmPass)) alert('Enter Correct Password on both fields');
-
-      const response = await fetch('http://localhost:4000/user/updateprofile/' + id, {
-         method: 'PUT',
-         credentials: 'include',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({
-            username: newUserName,
-            email: newEmail,
-            password: newPassword,
-         })
-      })
-
-      if (response.ok) { alert('Profile Updated!') } else { alert('Profile Upadtion Failed') }
-   }
+   }, [])
 
    return (
       <>
@@ -115,6 +142,7 @@ export const ProfilePage = () => {
                </div>
                <button>Update Profile</button>
             </form>
+            {loading && <div className='prof-loader'><Loader /></div>}
          </div>
       </>
    )

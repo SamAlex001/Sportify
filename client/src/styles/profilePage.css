@@ -18,7 +18,7 @@
    width: 100%;
 }
 
-.prof-content-container > * {
+.prof-content-container>* {
    margin-bottom: 1rem;
 }
 
@@ -48,4 +48,18 @@
 .prof-content-container button:focus {
    outline: none;
    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+
+.prof-loader {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(255, 255, 255, 0.5);
+   z-index: 100;
 }

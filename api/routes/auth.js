@@ -12,10 +12,11 @@ const secret = 'abcxyz';
 router.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
     try {
+        const hashedPassword = await bcrypt.hash(password, salt);
         const userDoc = await User.create({
             username,
             email,
-            password // : bcrypt.hashSync(password, salt)
+            password : hashedPassword
         });
         res.json(userDoc);
     } catch (error) {
@@ -34,13 +35,12 @@ router.post('/login', async (req, res) => {
             return
         }
         const userPass = userDoc.password;
-        const passwordOk = password;
-
+        const passwordOk = await bcrypt.compare(password, userPass);
+        // const passwordOk = password;
         // console.log(passwordOk)
         // console.log(userPass)
-        // const passwordOk = await bcrypt.compareSync(password, userDoc.password);
         
-        if (passwordOk == userPass) {
+        if (passwordOk) {
             jwt.sign({ username, id: userDoc._id }, secret, (error, token) => {
                 if (error) {
                     console.error('JWT Sign Error:', error);

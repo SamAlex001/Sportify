@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { SignUpModal } from "../components/Modal";
 import { Loader } from "../components/Loaders";
+import { toast } from 'react-toastify';
 
 export const SignUp = () => {
 
@@ -39,7 +40,7 @@ export const SignUp = () => {
                 navigate('/login');
             }, 1000)
         } else {
-            alert('Sign Up Failed');
+            toast.error('Sign Up Failed!');
         }
     }
 

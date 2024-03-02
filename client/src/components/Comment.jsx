@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import { CommentModal } from './Modal';
+import {toast} from 'react-toastify';
 
 export const PostComments = () => {
 
@@ -40,7 +41,7 @@ export const PostComments = () => {
       data.set('postId', postId);
 
       if ((userInfo.username)) {
-         if (comment === '') { alert('Write a comment before posting') }
+         if (comment === '') { toast.error('Write a comment before posting') }
          else {
             const response = await fetch('http://localhost:4000/comments/postcomment', {
                method: 'POST',
@@ -56,7 +57,7 @@ export const PostComments = () => {
             });
             if (response.ok) {
                setComment('')
-               alert('Comment Posted')
+               toast.success('Comment Posted')
             }
             window.location.reload();
          }
